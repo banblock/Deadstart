@@ -5,9 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerStats
 {
-    private float currentHealth;
-    private float maxHealth;
-    private float speed;
+    [SerializeField] private float currentHealth;
+    [SerializeField] private float maxHealth;
+    [SerializeField] private float speed;
 
     // 각 스탯의 초기값 설정
     public float Health { 
@@ -41,7 +41,7 @@ public class PlayerStats
         Health = MaxHealth;
         Attack = 1;
         AttackSpeed = 1;
-        Speed = 5f;
+        Speed = 3f;
     }
     
 }
