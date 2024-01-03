@@ -4,23 +4,37 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 10f;  // 총알 이동 속도
 
-    void Update()
+    [SerializeField]
+    private float speed = 10f;  // 총알 이동 속도
+
+    private ProjectilePoolManager projectilePoolManager;
+
+    void Start()
+    {
+        projectilePoolManager = ProjectilePoolManager.Instance;
+    }
+
+
+    void FixedUpdate()
     {
         MoveBullet();
+        DestroyBullet();
     }
 
     void MoveBullet()
     {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
+    }
 
+    private void DestroyBullet()
+    {
         if (!IsInScreen()) {
-            Destroy(gameObject);
+            projectilePoolManager.ReturnProjectileToPool(this.gameObject);
         }
     }
 
-    bool IsInScreen()
+    private bool IsInScreen()
     {
         Vector2 viewportPosition = Camera.main.WorldToViewportPoint(transform.position);
         return (viewportPosition.x >= 0 && viewportPosition.x <= 1 && viewportPosition.y >= 0 && viewportPosition.y <= 1);
@@ -39,4 +53,6 @@ public class Bullet : MonoBehaviour
 
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
+
+    
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Weapon : MonoBehaviour
 {
@@ -14,12 +15,15 @@ public class Weapon : MonoBehaviour
     private Transform ShootStartPoint;
 
     public float fireRate = 0.1f;     // 총 발사 간격
-
     private bool isShooting = false;
+
+    private ProjectilePoolManager projectilePoolManager;
 
     void Start()
     {
+        projectilePoolManager = ProjectilePoolManager.Instance;
     }
+
 
     void Update()
     {
@@ -73,8 +77,10 @@ public class Weapon : MonoBehaviour
 
     void ShootBullet()
     {
+        Debug.Log("발사!");
         // 총알을 생성하고 무기의 위치에 배치
-        GameObject bullet = Instantiate(bulletPrefab, ShootStartPoint.position, Quaternion.identity);
+
+        GameObject bullet = projectilePoolManager.GetProjectileFromPool(ShootStartPoint.position, Quaternion.identity);
 
         // 총알을 마우스 방향으로 회전
         bullet.GetComponent<Bullet>().RotateBulletTowardsMouse();
