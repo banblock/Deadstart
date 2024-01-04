@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
+    public static PlayerController Instance {  get; private set; } 
+
+
     [SerializeField]
     private PlayerStats playerStats;  // 플레이어 스탯 관리 클래스
     private Rigidbody2D rb;

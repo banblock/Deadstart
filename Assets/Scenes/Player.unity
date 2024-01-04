@@ -409,7 +409,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 1956087287}
   bulletPrefab: {fileID: 8564982800525464031, guid: 23733528193e4614ca4907ec1962d232, type: 3}
   ShootStartPoint: {fileID: 1070858924}
-  fireRate: 0.2
+  fireRate: 0.15
 --- !u!1 &759423550
 GameObject:
   m_ObjectHideFlags: 0
