@@ -66,9 +66,11 @@ public class Weapon : MonoBehaviour
 
         if (direction.x < 0f) {
             spriteRenderer.flipY = true;
+
         }
         else {
             spriteRenderer.flipY = false;
+
         }
 
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
@@ -77,12 +79,6 @@ public class Weapon : MonoBehaviour
 
     void ShootBullet()
     {
-        Debug.Log("발사!");
-        // 총알을 생성하고 무기의 위치에 배치
-
-        GameObject bullet = projectilePoolManager.GetProjectileFromPool(ShootStartPoint.position, Quaternion.identity);
-
-        // 총알을 마우스 방향으로 회전
-        bullet.GetComponent<Bullet>().RotateBulletTowardsMouse();
+        projectilePoolManager.GetProjectileFromPool(bulletPrefab, ShootStartPoint.position, transform.rotation);
     }
 }

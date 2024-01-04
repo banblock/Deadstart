@@ -5,8 +5,6 @@ public class ProjectilePoolManager : MonoBehaviour
 {
     public static ProjectilePoolManager Instance { get; private set; }
 
-    public GameObject projectilePrefab;
-
     private List<GameObject> projectilePool = new List<GameObject>();
 
     void Awake()
@@ -21,7 +19,7 @@ public class ProjectilePoolManager : MonoBehaviour
 
     void Start() { }
 
-    public GameObject GetProjectileFromPool(Vector3 position, Quaternion rotation)
+    public GameObject GetProjectileFromPool(GameObject gameObject, Vector3 position, Quaternion rotation)
     {
         foreach (GameObject projectile in projectilePool) {
             if (!projectile.activeInHierarchy) {
@@ -33,7 +31,7 @@ public class ProjectilePoolManager : MonoBehaviour
         }
 
         // 풀에 비활성화된 투사체가 없으면 새로운 투사체 생성
-        GameObject newProjectile = Instantiate(projectilePrefab, position, rotation, transform);
+        GameObject newProjectile = Instantiate(gameObject, position, rotation, transform);
         projectilePool.Add(newProjectile);
         return newProjectile;
     }
