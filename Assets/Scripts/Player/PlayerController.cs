@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
     private PlayerStats playerStats;  // 플레이어 스탯 관리 클래스
     private Rigidbody2D rb;
 
+    [SerializeField]
+    private Weapon weapon;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -26,6 +29,10 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         MovePlayer();
+
+        if (Input.GetMouseButton(0)) {
+            weapon.Attack();
+        }
     }
 
     private void MovePlayer()
