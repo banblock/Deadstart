@@ -6,15 +6,49 @@ using UnityEngine;
 public class AutoAttackWeapon : Weapon
 {
 
-    private void Update()
-    {
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
 
+    [SerializeField]
+    private GameObject bulletPrefab;  // 총알 프리팹
+
+    [SerializeField]
+    private Transform ShootStartPoint;
+
+    [SerializeField]
+    private EnemyScanner enemyScanner;
+
+    private ProjectilePoolManager projectilePoolManager;
+
+    void Start()
+    {
+        //enemyScanner = enemyScanner.GetComponent<EnemyScanner>();
+        projectilePoolManager = ProjectilePoolManager.Instance;
     }
 
-    // 공격 동작을 처리하는 가상 메서드를 오버라이드
+    void Update()
+    {
+        RotateWeaponTowardsTarget();
+    }
+
     protected override void PerformAttack()
     {
-        // 자동 공격 무기의 특화 동작 추가
-        Debug.Log("Performing auto attack");
+        projectilePoolManager.GetProjectileFromPool(bulletPrefab, ShootStartPoint.position, transform.rotation);
     }
+
+    void RotateWeaponTowardsTarget()
+    {
+        
+        Vector3 targetPosision = enemyScanner.GetNearestTarget().position;
+        targetPosision.z = 0f;
+
+        Vector3 weaponPosition = transform.position;
+        weaponPosition.z = 0f;
+
+        Vector3 direction = targetPosision - weaponPosition;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+
 }

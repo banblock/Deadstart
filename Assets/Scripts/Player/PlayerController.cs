@@ -2,9 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
     public static PlayerController Instance {  get; private set; } 
-
 
     [SerializeField]
     private PlayerStats playerStats;  // 플레이어 스탯 관리 클래스
@@ -29,10 +27,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         MovePlayer();
-
-        if (Input.GetMouseButton(0)) {
-            weapon.Attack();
-        }
+        weapon.Attack();
     }
 
     private void MovePlayer()
@@ -49,9 +44,7 @@ public class PlayerController : MonoBehaviour
 
     private void TakeDamage(int damage)
     {
-
         playerStats.Health -= damage;
-
     }
 
     private void Die()

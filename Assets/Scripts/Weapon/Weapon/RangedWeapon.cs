@@ -22,16 +22,17 @@ public class RangedWeapon : Weapon
 
     void Update()
     {
-        RotateWeaponTowardsMouse();
+        RotateWeaponTowardsTarget();
     }
 
     protected override void PerformAttack()
     {
-        projectilePoolManager.GetProjectileFromPool(bulletPrefab, ShootStartPoint.position, transform.rotation);
+        if (Input.GetMouseButton(0)) {
+            projectilePoolManager.GetProjectileFromPool(bulletPrefab, ShootStartPoint.position, transform.rotation);
+        }
     }
 
-
-    void RotateWeaponTowardsMouse()
+    void RotateWeaponTowardsTarget()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0f;
