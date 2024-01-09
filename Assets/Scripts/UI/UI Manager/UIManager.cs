@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -11,53 +12,43 @@ public class UIManager : MonoBehaviour
 
     public ToggleableUIContainer[] ToggleableUIs;
 
+    private ToggleableUI currentOpenUI;
+
     private void Update()
     {
-        foreach (ToggleableUIContainer toggleableUI in ToggleableUIs) {
-            if (Input.GetKeyDown(toggleableUI.keyCode)) {
-                if (toggleableUI.ToggleableUI.IsOpen()) {
-                    CloseUI(toggleableUI.ToggleableUI);
-                }
-                else {
-                    OpenUI(toggleableUI.ToggleableUI);
-                }
-            }
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            CloseCurrentUI();
         }
 
-        // Escape 키를 누르면 현재 열려있는 창을 닫습니다.
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        foreach (ToggleableUIContainer uiContainer in ToggleableUIs) {
+            if (Input.GetKeyDown(uiContainer.keyCode)) {
+                OpenUI(uiContainer.ToggleableUI);
+            }
+        }
+    }
+
+    private void OpenUI(ToggleableUI uiToOpen)
+    {
+        if (currentOpenUI != uiToOpen) {
+            CloseCurrentUI();
+            uiToOpen.OpenUI();
+            currentOpenUI = uiToOpen;
+        }
+        else {
             CloseCurrentUI();
         }
     }
 
-    private void OpenUI(ToggleableUI ui)
+    private void CloseUI(ToggleableUI uiToClose)
     {
-        // 다른 창이 열려 있는지 확인하고 닫습니다.
-        foreach (ToggleableUIContainer toggleableUI in ToggleableUIs) {
-            if (toggleableUI.ToggleableUI.IsOpen() && toggleableUI.ToggleableUI != ui) {
-                CloseUI(toggleableUI.ToggleableUI);
-            }
-        }
-
-        if (ui != null) {
-            ui.ToggleUI();
-        }
-    }
-
-    private void CloseUI(ToggleableUI ui)
-    {
-        if (ui != null) {
-            ui.ToggleUI();
-        }
+        uiToClose.CloseUI();
     }
 
     private void CloseCurrentUI()
     {
-        foreach (ToggleableUIContainer toggleableUI in ToggleableUIs) {
-            if (toggleableUI.ToggleableUI.IsOpen()) {
-                CloseUI(toggleableUI.ToggleableUI);
-                return;
-            }
+        if (currentOpenUI != null) {
+            CloseUI(currentOpenUI);
+            currentOpenUI = null;
         }
     }
 }
