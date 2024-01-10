@@ -3,16 +3,27 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance { private set; get; }
+
     [System.Serializable]
     public class ToggleableUIContainer
     {
         public ToggleableUI ToggleableUI;
         public KeyCode keyCode;
     }
-
     public ToggleableUIContainer[] ToggleableUIs;
-
     private ToggleableUI currentOpenUI;
+
+    private void Awake()
+    {
+        if (Instance == null) {
+            Instance = this;
+            return;
+        }
+        else {
+            Destroy(gameObject);
+        }
+    }
 
     private void Update()
     {
@@ -44,11 +55,13 @@ public class UIManager : MonoBehaviour
         uiToClose.CloseUI();
     }
 
-    private void CloseCurrentUI()
+    public void CloseCurrentUI()
     {
         if (currentOpenUI != null) {
             CloseUI(currentOpenUI);
             currentOpenUI = null;
         }
     }
+
+
 }

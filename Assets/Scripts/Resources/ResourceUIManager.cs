@@ -24,4 +24,6 @@ public class ResourceUIManager : MonoBehaviour
             newResourceUI.resourceName = resource.resourceName;
         }
     }
+
+
 }
