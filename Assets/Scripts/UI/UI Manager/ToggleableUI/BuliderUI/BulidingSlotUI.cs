@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class BulidingSlotUI : MonoBehaviour
 {
+    [SerializeField]
+    Image bulidingImage;
     [SerializeField]
     TMP_Text bulidingNameText;
     [SerializeField]
@@ -14,6 +17,7 @@ public class BulidingSlotUI : MonoBehaviour
 
     public class BulidingData
     {
+        public Sprite sprite;
         public string name;
         public string comment;
 
@@ -24,6 +28,7 @@ public class BulidingSlotUI : MonoBehaviour
 
     void initSlot(BulidingData bulidingData)
     {
+        bulidingImage.sprite = bulidingData.sprite;
         bulidingNameText.text = bulidingData.name;
         bulidingCommentText.text = bulidingData.comment;
     }
