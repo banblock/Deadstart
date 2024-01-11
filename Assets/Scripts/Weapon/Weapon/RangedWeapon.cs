@@ -22,6 +22,7 @@ public class RangedWeapon : Weapon
 
     void Update()
     {
+        base.Attack();
         RotateWeaponTowardsTarget();
     }
 
@@ -45,11 +46,9 @@ public class RangedWeapon : Weapon
 
         if (direction.x < 0f) {
             spriteRenderer.flipY = true;
-
         }
         else {
             spriteRenderer.flipY = false;
-
         }
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
