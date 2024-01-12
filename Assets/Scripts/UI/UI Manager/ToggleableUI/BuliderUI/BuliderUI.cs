@@ -18,4 +18,9 @@ public class BuliderUI : ToggleableUI
     {
         gameObject.SetActive(false);
     }
+
+    public void UpdateUI()
+    {
+
+    }
 }

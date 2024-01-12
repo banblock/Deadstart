@@ -11,7 +11,7 @@ public class ResourceManager : MonoBehaviour
     public List<Resource> resources = new List<Resource>();
 
     // 이벤트 정의
-    public event Action<string, int> OnResourceChanged;
+    public event Action<ResourceType, int> OnResourceChanged;
 
     // 초기화
     private void Start()
@@ -23,10 +23,10 @@ public class ResourceManager : MonoBehaviour
     {
         // Test Code
         if(Input.GetKeyDown(KeyCode.Alpha1)) {
-            IncreaseResource("Steal", 10);
+            IncreaseResource(ResourceType.Organic, 10);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2)) {
-            IncreaseResource("Energy", 10);
+            IncreaseResource(ResourceType.Inorganic, 10);
         }
 
     }
@@ -40,7 +40,7 @@ public class ResourceManager : MonoBehaviour
     }
 
     // 특정 자원 양 증가
-    public void IncreaseResource(string resourceName, int amount)
+    public void IncreaseResource(ResourceType resourceName, int amount)
     {
         Resource resource = GetResource(resourceName);
         if (resource != null) {
@@ -51,7 +51,7 @@ public class ResourceManager : MonoBehaviour
     }
 
     // 특정 자원 양 감소
-    public void DecreaseResource(string resourceName, int amount)
+    public void DecreaseResource(ResourceType resourceName, int amount)
     {
         Resource resource = GetResource(resourceName);
         if (resource != null && resource.currentAmount >= amount) {
@@ -65,16 +65,16 @@ public class ResourceManager : MonoBehaviour
     }
 
     // 특정 자원의 현재 양 반환
-    public int GetCurrentAmount(string resourceName)
+    public int GetCurrentAmount(ResourceType resourceName)
     {
         Resource resource = GetResource(resourceName);
         return (resource != null) ? resource.currentAmount : 0;
     }
 
     // 자원 이름에 해당하는 Resource 객체 반환
-    private Resource GetResource(string resourceName)
+    private Resource GetResource(ResourceType resource)
     {
-        return resources.Find(r => r.resourceName == resourceName);
+        return resources.Find(r => r.resource == resource);
     }
 }
 

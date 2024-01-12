@@ -11,7 +11,11 @@ public class Weapon : MonoBehaviour
 
     private float nextTimeToFire = 0f;
 
-    // 무기를 사용하여 공격할 때 호출되는 메서드
+    void Update()
+    {
+        Attack();
+    }
+
     public void Attack()
     {
         if (Time.time >= nextTimeToFire) {
@@ -20,7 +24,6 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    // 공격 동작을 처리하는 가상 메서드
     protected virtual void PerformAttack()
     {
         Debug.Log("Performing generic attack");

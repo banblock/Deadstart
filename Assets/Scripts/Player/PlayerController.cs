@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
 
     [SerializeField]
-    private Weapon weapon;
+    private WeaponManager weaponManager;
 
     void Start()
     {
@@ -27,8 +27,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         MovePlayer();
-        weapon.Attack();
     }
+
 
     private void MovePlayer()
     {
