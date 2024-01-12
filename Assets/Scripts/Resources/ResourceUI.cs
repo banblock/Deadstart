@@ -7,7 +7,7 @@ public class ResourceUI : MonoBehaviour
     public Image resourceImage;
     public Text resourceText;
     public ResourceManager resourceManager;
-    public string resourceName;
+    public ResourceType resourceName;
 
     private void Start()
     {
@@ -19,7 +19,7 @@ public class ResourceUI : MonoBehaviour
         UpdateResourceUI();
     }
 
-    private void HandleResourceChanged(string changedResourceName, int newAmount)
+    private void HandleResourceChanged(ResourceType changedResourceName, int newAmount)
     {
         if (changedResourceName == resourceName) {
             UpdateResourceUI();
@@ -32,10 +32,7 @@ public class ResourceUI : MonoBehaviour
             int currentAmount = resourceManager.GetCurrentAmount(resourceName);
             resourceText.text = currentAmount.ToString();
 
-            if (resourceName == "Wood") {
-                Sprite woodSprite = Resources.Load<Sprite>("WoodImage");
-                resourceImage.sprite = woodSprite;
-            }
+            //자원 이미지 출력
         }
     }
 

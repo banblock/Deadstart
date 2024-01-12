@@ -21,7 +21,7 @@ public class ResourceUIManager : MonoBehaviour
         foreach (Resource resource in resourceManager.resources) {
             ResourceUI newResourceUI = Instantiate(resourceUIPrefab, uiContainer);
             newResourceUI.resourceManager = resourceManager;
-            newResourceUI.resourceName = resource.resourceName;
+            newResourceUI.resourceName = resource.resource;
         }
     }
 
