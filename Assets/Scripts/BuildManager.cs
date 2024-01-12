@@ -10,7 +10,6 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class BuildManager : MonoBehaviour
 {
-    private string targetTag = "Building";
     public Tilemap tilemap;
     public TileBase tile;
     private TileMapTools buildTilemapTools;

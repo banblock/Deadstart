@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Building
   - Item
+  - Projectile
   layers:
   - Default
   - TransparentFX
