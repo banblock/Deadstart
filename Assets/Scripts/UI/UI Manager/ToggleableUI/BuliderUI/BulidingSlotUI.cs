@@ -12,6 +12,8 @@ public class BulidingSlotUI : MonoBehaviour
     TMP_Text bulidingNameText;
     [SerializeField]
     TMP_Text bulidingCommentText;
+    [SerializeField]
+    HorizontalLayoutGroup resourceUIContainers;
 
     BulidingData buliding;
 
@@ -28,6 +30,7 @@ public class BulidingSlotUI : MonoBehaviour
 
     void initSlot(BulidingData bulidingData)
     {
+        buliding = bulidingData;
         bulidingImage.sprite = bulidingData.sprite;
         bulidingNameText.text = bulidingData.name;
         bulidingCommentText.text = bulidingData.comment;

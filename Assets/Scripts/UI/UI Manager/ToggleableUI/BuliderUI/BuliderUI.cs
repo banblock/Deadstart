@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BuliderUI : ToggleableUI
 {
+
     void Start()
     {
         gameObject.SetActive(false);
@@ -22,5 +23,9 @@ public class BuliderUI : ToggleableUI
     public void UpdateUI()
     {
 
+
+
     }
+
+
 }
