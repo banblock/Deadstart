@@ -15,6 +15,11 @@ MonoBehaviour:
   buildings:
   - buildingPrefab: {fileID: 0}
     sprite: {fileID: 21300000, guid: 36a793bbf119a2a4e900895206cb2891, type: 3}
-    name: SampleBuilding
+    name: SampleBuilding01
     comment: Awesome!
+    requiredResources: []
+  - buildingPrefab: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 36a793bbf119a2a4e900895206cb2891, type: 3}
+    name: SampleBuilding02
+    comment: Good!
     requiredResources: []
