@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
         MovePlayer();
     }
 
-
     private void MovePlayer()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
