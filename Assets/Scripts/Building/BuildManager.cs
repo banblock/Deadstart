@@ -14,6 +14,7 @@ public class BuildManager : MonoBehaviour
     public TileBase tile;
     private TileMapTools buildTilemapTools;
     private Vector3Int tilemapPos = Vector3Int.zero;
+    public List<Building> buildings;
 
     private void Start()
     {  
