@@ -16,7 +16,13 @@ public class BuildingSlotUI : MonoBehaviour
     [SerializeField]
     HorizontalLayoutGroup resourceUIContainers;
 
+    BuilderUI BuilderUI;
     BuildingData buliding;
+
+    public void Start()
+    {
+        BuilderUI = BuilderUI.Instace;
+    }
 
     public void InitSlot(BuildingData bulidingData)
     {
@@ -28,8 +34,6 @@ public class BuildingSlotUI : MonoBehaviour
 
     public void SelectBuilding()
     {
-        BuilderUI.Instace.ChangeBuildMode();
-
-        Debug.Log("현제 빌딩을 건설합니다.");
+        BuilderUI.ChangeBuildMode();
     }
 }
