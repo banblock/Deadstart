@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using static UnityEditor.ObjectChangeEventStream;
 
-public class BulidingSlotUI : MonoBehaviour
+public class BuildingSlotUI : MonoBehaviour
 {
     [SerializeField]
     Image bulidingImage;
@@ -12,22 +13,20 @@ public class BulidingSlotUI : MonoBehaviour
     TMP_Text bulidingNameText;
     [SerializeField]
     TMP_Text bulidingCommentText;
+    [SerializeField]
+    HorizontalLayoutGroup resourceUIContainers;
 
-    BulidingData buliding;
+    BuilderUI BuilderUI;
+    BuildingData buliding;
 
-    public class BulidingData
+    public void Start()
     {
-        public Sprite sprite;
-        public string name;
-        public string comment;
-
-        public int Inorganic;
-        public int Organic;
-        public int Energy;
+        BuilderUI = BuilderUI.Instace;
     }
 
-    void initSlot(BulidingData bulidingData)
+    public void InitSlot(BuildingData bulidingData)
     {
+        buliding = bulidingData;
         bulidingImage.sprite = bulidingData.sprite;
         bulidingNameText.text = bulidingData.name;
         bulidingCommentText.text = bulidingData.comment;
@@ -35,6 +34,6 @@ public class BulidingSlotUI : MonoBehaviour
 
     public void SelectBuilding()
     {
-        Debug.Log("현제 빌딩을 건설합니다.");
+        BuilderUI.ChangeBuildMode();
     }
 }

@@ -15,11 +15,6 @@ public class RangedWeapon : Weapon
 
     private ProjectilePoolManager projectilePoolManager;
 
-    void Start()
-    {
-        projectilePoolManager = ProjectilePoolManager.Instance;
-    }
-
     void Update()
     {
         base.Attack();
@@ -33,6 +28,13 @@ public class RangedWeapon : Weapon
         }
     }
 
+    protected override void InitSetting()
+    {
+        base.InitSetting();
+        projectilePoolManager = ProjectilePoolManager.Instance;
+    }
+
+    
     void RotateWeaponTowardsTarget()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
