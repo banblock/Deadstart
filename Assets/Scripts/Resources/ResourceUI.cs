@@ -19,7 +19,7 @@ public class ResourceUI : MonoBehaviour
         UpdateResourceUI();
     }
 
-    private void HandleResourceChanged(ResourceType changedResourceName, int newAmount)
+    public void HandleResourceChanged(ResourceType changedResourceName, int newAmount)
     {
         if (changedResourceName == resourceName) {
             UpdateResourceUI();
