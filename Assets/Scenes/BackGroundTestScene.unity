@@ -10218,6 +10218,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilemap: {fileID: 782546762}
   tile: {fileID: 11400000, guid: ae06a3c60290a3341bfc8774ba37c18d, type: 2}
+  buildings:
+  - Tiles:
+    - {fileID: 11400000, guid: ae06a3c60290a3341bfc8774ba37c18d, type: 2}
+    triggerPrefab: {fileID: 85202520581922336, guid: 932ebc4b5c76a3848ab7621b1f1bfd35, type: 3}
+  buildingState: 0
 --- !u!4 &497421083
 Transform:
   m_ObjectHideFlags: 0
