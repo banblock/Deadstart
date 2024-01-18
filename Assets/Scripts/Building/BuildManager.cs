@@ -15,6 +15,8 @@ public class BuildManager : MonoBehaviour
     public TileBase tile;
     private TileMapTools buildTilemapTools;
     private Vector3Int tilemapPos = Vector3Int.zero;
+    public GameObject buildingGuid;
+    Vector2 pos;
     [SerializeField]
     public List<Building> buildings;
     public enum BuildingType {small, middel, big};
@@ -23,6 +25,7 @@ public class BuildManager : MonoBehaviour
     private void Start()
     {  
         buildTilemapTools = new TileMapTools();
+        buildingGuid = GameObject.Find("Guid");
     }
 
     // Update is called once per frame
@@ -55,12 +58,7 @@ public class BuildManager : MonoBehaviour
 
     bool CheckHit()
     {
-        Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 pos3Int = new Vector3(pos.x, pos.y, 0);
-        Vector3 tilePos3 = tilemap.WorldToCell(pos3Int);
-        tilemapPos = new Vector3Int((int)tilePos3.x, (int)tilePos3.y, 0);
-        Debug.Log(tilePos3.x);
-        Debug.Log(tilePos3.y);
+        SetTilePos();
         TileBase tileBase = tilemap.GetTile(tilemapPos);
         if (tileBase != null)
         {
@@ -72,10 +70,34 @@ public class BuildManager : MonoBehaviour
         else
         {
             Debug.Log("null");
-
-            return false;
+            RaycastHit2D hit = Physics2D.Raycast(pos,Vector2.zero, 0f);
+            if(hit.collider != null)
+            {
+                return true;
+            }
+            else{
+                SpriteRenderer sr = buildingGuid.GetComponent<SpriteRenderer>();
+                if(sr.color != Color.green)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
     }
+
+    public void SetTilePos()
+    {
+        pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 pos3 = new Vector3(pos.x, pos.y, 0);
+        Vector3 tilePos3 = tilemap.WorldToCell(pos3);
+        tilemapPos = new Vector3Int((int)tilePos3.x, (int)tilePos3.y, 0);
+        Debug.Log(tilePos3.x);
+        Debug.Log(tilePos3.y);
+    } 
 
     public void SetBuildingTrigger(Building building)
     {
