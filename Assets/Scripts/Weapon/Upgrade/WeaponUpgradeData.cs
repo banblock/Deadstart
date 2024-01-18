@@ -7,6 +7,6 @@ public class WeaponUpgradeData
 {
     public string upgradeName;
     public GameObject weaponPrefab;
-    public List<Resource> requiredUpgrades;
+    public List<Item> requiredUpgrades;
     public List<string> nextUpgrade;
 }

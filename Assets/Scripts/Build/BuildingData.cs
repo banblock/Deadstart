@@ -10,5 +10,5 @@ public class BuildingData
     public string name;
     public string comment;
 
-    public List<Resource> requiredResources;
+    public List<Item> requiredResources;
 }

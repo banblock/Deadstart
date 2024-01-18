@@ -20,31 +20,19 @@ MonoBehaviour:
     - 01-02
   - upgradeName: 01-02
     weaponPrefab: {fileID: 8869894488803603688, guid: 9e19e12d87ed6e440815174ac278912c, type: 3}
-    requiredUpgrades:
-    - resource: 1
-      startingAmount: 10
-      currentAmount: 0
+    requiredUpgrades: []
     nextUpgrade:
     - 01-03-1
     - 01-03-2
   - upgradeName: 01-03-1
     weaponPrefab: {fileID: 8869894488803603688, guid: 17fd1d01d2b6d904e8e323b4c7034d1c, type: 3}
-    requiredUpgrades:
-    - resource: 1
-      startingAmount: 10
-      currentAmount: 0
-    - resource: 2
-      startingAmount: 10
-      currentAmount: 0
+    requiredUpgrades: []
     nextUpgrade:
     - 01-03
     - 01-04
   - upgradeName: 01-03-2
     weaponPrefab: {fileID: 8869894488803603688, guid: 1ad02b96225afcf43965648a7f7aef68, type: 3}
-    requiredUpgrades:
-    - resource: 1
-      startingAmount: 20
-      currentAmount: 0
+    requiredUpgrades: []
     nextUpgrade:
     - 01-03
     - 01-04

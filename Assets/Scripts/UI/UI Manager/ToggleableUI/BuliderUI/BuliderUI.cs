@@ -37,6 +37,7 @@ public class BuilderUI : ToggleableUI
 
     public override void CloseUI()
     {
+       
         gameObject.SetActive(false);
     }
 
