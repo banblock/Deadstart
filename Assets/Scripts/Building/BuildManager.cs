@@ -70,22 +70,22 @@ public class BuildManager : MonoBehaviour
         else
         {
             Debug.Log("null");
-            RaycastHit2D hit = Physics2D.Raycast(pos,Vector2.zero, 0f);
+            /*RaycastHit2D hit = Physics2D.Raycast(pos,Vector2.zero, 0f);
             if(hit.collider != null)
             {
                 return true;
             }
-            else{
-                SpriteRenderer sr = buildingGuid.GetComponent<SpriteRenderer>();
-                if(sr.color != Color.green)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+            else{*/
+            SpriteRenderer sr = buildingGuid.GetComponent<SpriteRenderer>();
+            if(sr.color != Color.green)
+            {
+                return true;
             }
+            else
+            {
+                return false;
+            }
+            //}
         }
     }
 
