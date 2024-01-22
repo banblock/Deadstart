@@ -22,16 +22,21 @@ public class BuildManager : MonoBehaviour
     public enum BuildingType {small, middel, big};
     public BuildingType buildingState;
 
+    bool doBuild = false;
+    
+
     private void Start()
     {  
         buildTilemapTools = new TileMapTools();
         buildingGuid = GameObject.Find("Guid");
+        buildingGuid.SetActive(false);
+        ActionManager.instance.OnActionModeChanged += ToggleBuildMode;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (doBuild && Input.GetMouseButtonDown(0))
         {
             if (!CheckHit())
             {
@@ -42,8 +47,9 @@ public class BuildManager : MonoBehaviour
                         building = buildings[0];
                         building.DrawBuilding(tilemap, tilemapPos);
                         SetBuildingTrigger(building);
+                        ActionManager.instance.ChangeActionMode(ActionMode.AttackMode);
+                        buildingGuid.SetActive(false);
                         break;
-
                 }
 
 
@@ -62,14 +68,11 @@ public class BuildManager : MonoBehaviour
         TileBase tileBase = tilemap.GetTile(tilemapPos);
         if (tileBase != null)
         {
-
             Debug.Log("hit");
             return true;
-
         }
         else
         {
-            Debug.Log("null");
             /*RaycastHit2D hit = Physics2D.Raycast(pos,Vector2.zero, 0f);
             if(hit.collider != null)
             {
@@ -102,6 +105,20 @@ public class BuildManager : MonoBehaviour
     public void SetBuildingTrigger(Building building)
     {
         GameObject trigger = Instantiate(building.GetTriggerPrefab(), building.GetTriggerPos(), Quaternion.identity);
+    }
+
+    public void ToggleBuildMode(ActionMode action)
+    {
+        doBuild = (action == ActionMode.BuildMode);
+        if(doBuild) {
+            buildingGuid.SetActive(true);
+        }
+    }
+
+    
+    void OnDestroy()
+    {
+        ActionManager.instance.OnActionModeChanged -= ToggleBuildMode;
     }
 }
 

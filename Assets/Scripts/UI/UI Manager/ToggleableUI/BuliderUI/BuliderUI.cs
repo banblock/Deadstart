@@ -70,7 +70,7 @@ public class BuilderUI : ToggleableUI
 
     public void ChangeBuildMode()
     {
+        UIManager.Instance.CloseCurrentUI();
         ActionManager.instance.ChangeActionMode(ActionMode.BuildMode);
-        gameObject.SetActive(false);
     }
 }

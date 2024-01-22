@@ -9,7 +9,10 @@ public class BuildingGuid : MonoBehaviour
     // Start is called before the first frame update
     public Tilemap tilemap;
     private SpriteRenderer spriteRenderer;
+
+    [HideInInspector]
     public bool hit;
+    
     void Start()
     {
         hit = false;
@@ -46,7 +49,6 @@ public class BuildingGuid : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        
         spriteRenderer.color = Color.red;
     }
 
