@@ -16,8 +16,17 @@ public class WeaponManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R)) {
+        if (Input.GetKeyDown(KeyCode.Alpha1)) {
+            UpgradeWeapon("01-01");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2)) {
             UpgradeWeapon("01-02");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3)) {
+            UpgradeWeapon("01-03-1");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4)) {
+            UpgradeWeapon("01-03-2");
         }
     }
 
