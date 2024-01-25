@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8374813261719808774}
   - component: {fileID: 5988349289976301586}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Granage
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
