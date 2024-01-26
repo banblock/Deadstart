@@ -76,22 +76,23 @@ public class Projectile : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.tag == "Enemy") {
-            HitEnemy();
+            HitEnemy(other);
 
-            currentProjectilePenetration--;
-            if(currentProjectilePenetration < 0) {
-                DestroyBullet();
-            }
+            
         }
     }
 
     /// <summary>
     /// 적과 충돌했을 때 동작
     /// </summary>
-    protected virtual void HitEnemy()
+    /// <param name="enemy"> 충돌한 적 </param>
+    protected virtual void HitEnemy(Collider2D enemy)
     {
-
         //enemy.TakeDamage(projectileDamage);
+        currentProjectilePenetration--;
+        if (currentProjectilePenetration < 0) {
+            DestroyBullet();
+        }
     }
 
     /// <summary>

@@ -29,9 +29,10 @@ public class ProjectilePoolManager : MonoBehaviour
                 return projectile;
             }
         }
-
+        
         // 풀에 비활성화된 투사체가 없으면 새로운 투사체 생성
         GameObject newProjectile = Instantiate(gameObject, position, rotation, transform);
+        newProjectile.name = gameObject.name;
         projectilePool.Add(newProjectile);
         return newProjectile;
     }
