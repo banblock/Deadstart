@@ -28,6 +28,9 @@ public class WeaponManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha4)) {
             UpgradeWeapon("01-03-2");
         }
+        if (Input.GetKeyDown(KeyCode.Alpha5)) {
+            UpgradeWeapon("01-03-3");
+        }
     }
 
     void SpawnWeapon(GameObject weaponPrefab)
