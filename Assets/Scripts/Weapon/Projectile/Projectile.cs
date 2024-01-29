@@ -18,7 +18,7 @@ public class Projectile : MonoBehaviour
     protected int projectilePenetration = 0; //투사체 관통력
     private int currentProjectilePenetration;
     [SerializeField]
-    protected MovementType movementType = MovementType.Linear;
+    protected MovementType movementType = MovementType.Linear; // 발체체 이동 형태
 
     void Start()
     {
