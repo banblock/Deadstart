@@ -74,7 +74,7 @@ public class WeaponManager : MonoBehaviour
     /// <returns> 무기 정보 </returns>
     public WeaponUpgradeData GetWeaponData(string upgradeName)
     {
-        WeaponUpgradeData upgradeData = upgradeOptions.upgradeDatas.Find(info => info.upgradeName == upgradeName);
+        WeaponUpgradeData upgradeData = upgradeOptions.upgradeDatas.Find(info => info.name == upgradeName);
 
         if (upgradeData!= null) {
             return upgradeData;
