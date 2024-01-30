@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController Instance {  get; private set; } 
 
     [SerializeField]
-    private PlayerStats playerStats;  // ÇÃ·¹ÀÌ¾î ½ºÅÈ °ü¸® Å¬·¡½º
+    private PlayerStats playerStats;  // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½
     private Rigidbody2D rb;
 
     [SerializeField]
@@ -16,12 +16,13 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
 
-        // ÇÃ·¹ÀÌ¾î ½ºÅÈ ÃÊ±âÈ­
+        // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
         playerStats = new PlayerStats();
         playerStats.InitializeStats();
 
-        // ½ºÅÈ ¾÷µ¥ÀÌÆ®
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
         UpdatePlayerStats();
+        
     }
 
     void Update()
@@ -38,7 +39,7 @@ public class PlayerController : MonoBehaviour
         Vector2 movement = new Vector2(horizontalInput, verticalInput);
         movement.Normalize();
 
-        // ÀÌµ¿ ¼Óµµ¿¡ ½ºÅÈ Àû¿ë
+        // ï¿½Ìµï¿½ ï¿½Óµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         rb.velocity = movement * playerStats.Speed;
     }
 
@@ -54,7 +55,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // ½ºÅÈ ¾÷µ¥ÀÌÆ® ¹× UI ÅØ½ºÆ® °»½Å
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ UI ï¿½Ø½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
     private void UpdatePlayerStats()
     {
         Debug.Log($"Player Stats: HP - {playerStats.Health}, ATK - {playerStats.Attack}, ATK Speed - {playerStats.AttackSpeed}, Speed - {playerStats.Speed}");
