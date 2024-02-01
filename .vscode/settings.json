@@ -56,6 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "DeadStar.sln"
-
+    "dotnet.defaultSolution": "My project.sln"
 }

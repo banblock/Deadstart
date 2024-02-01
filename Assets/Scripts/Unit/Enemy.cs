@@ -95,4 +95,35 @@ public class Enemy : Unit
         yield return new WaitForSeconds(attackCooldown);
         isCooldown = false;
     }
+
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        float healthPercentage = currentHealth / maxHealth;
+        healthBar.UpdateHealth(healthPercentage);
+        
+        if (currentHealth <= 0f)
+        {
+            Die();
+        }
+    }
+
+    protected virtual void Die()
+    {
+        // 적 사망 시 처리할 내용을 여기에 추가
+        Destroy(gameObject);
+    }
+
+      void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Bullet"))
+        {
+            Bullet bullet = other.GetComponent<Bullet>();
+            if (bullet != null)
+            {
+                TakeDamage(bullet.damage);
+                Destroy(other.gameObject); // 총알 제거
+            }
+        }
+    }
 }
