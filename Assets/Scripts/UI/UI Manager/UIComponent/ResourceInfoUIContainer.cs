@@ -16,11 +16,14 @@ public class ResourceInfoUIContainer : MonoBehaviour
     }
 
     public void SetInitUI(List<Item> items) {
-        Instantiate(resourceInfoUIComponentPrefab);
+        //Instantiate(resourceInfoUIComponentPrefab);
+
+        Debug.Log(items.Count);
 
         foreach (Item item in items)
         {
-            ResourceInfoUIComponent resourceInfoUIComponent = resourceInfoUIComponentPrefab.GetComponent<ResourceInfoUIComponent>();
+            GameObject resourceInfoUIComponentObject = Instantiate(resourceInfoUIComponentPrefab, transform);
+            ResourceInfoUIComponent resourceInfoUIComponent = resourceInfoUIComponentObject.GetComponent<ResourceInfoUIComponent>();
             resourceInfoUIComponent.SetInitUI(item);
         }
     }

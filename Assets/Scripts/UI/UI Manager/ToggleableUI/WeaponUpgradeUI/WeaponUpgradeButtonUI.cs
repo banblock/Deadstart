@@ -14,12 +14,21 @@ public class WeaponUpgradeButtonUI : MonoBehaviour
 
     [SerializeField]
     ResourceInfoUIContainer resourceContainer;
-    
+
+    WeaponUpgradeData weaponUpgradeData;
+
     public void SetInitUI(WeaponUpgradeData weaponData)
     {
-        image.sprite = weaponData.sprite;
+        weaponUpgradeData = weaponData;
         nameText.text = weaponData.name;
+        image.sprite = weaponData.sprite;
         resourceContainer.SetInitUI(weaponData.requiredUpgrades);
     }
+
+    public void OnUpgradeButtonClick()
+    {
+        WeaponManager.Instance.ChangeWeapon(weaponUpgradeData.name);
+    }
+
 }
 

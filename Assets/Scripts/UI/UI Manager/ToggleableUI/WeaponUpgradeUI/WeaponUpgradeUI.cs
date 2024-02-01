@@ -58,13 +58,8 @@ public class WeaponUpgradeUI : ToggleableUI
             WeaponUpgradeButtonUI upgradeButtonUI = buttonUI.GetComponent<WeaponUpgradeButtonUI>();
             upgradeButtonUI.SetInitUI(upgradeData);
             weaponUpgradeButtonList.Add(buttonUI);
+            
         }
-
     }
-
-}
-
-class UpgradeList
-{
 
 }
