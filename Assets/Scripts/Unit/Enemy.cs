@@ -1,20 +1,19 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : Unit
 {
     public float speed;
     public float detectionRange;
-    public float chasingRange; // 수정: 쫓아가는 범위
     public float attackRange;
     public float attackCooldown = 2f;
-    public float attackDamage = 10f; 
-    public Rigidbody2D target;
-    
+    public float attackDamage = 10f; // 에너미의 공격력
+    public Rigidbody2D target; // 공격 대상
+
     Rigidbody2D rigid;
     SpriteRenderer spriter;
     bool isCooldown = false;
-    bool isChasing = false;
 
     void Awake()
     {
@@ -26,24 +25,14 @@ public class Enemy : Unit
     {
         if (target == null)
         {
+            // 특정 대상이 설정되어 있지 않은 경우, 기본적으로 플레이어를 대상으로 설정
             target = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         }
     }
 
     void Update()
     {
-        float distanceToTarget = Vector2.Distance(transform.position, target.position);
-
-        if (distanceToTarget <= chasingRange) // 수정: 쫓아가는 범위 내에 있을 때만 추적
-        {
-            isChasing = true;
-        }
-        else
-        {
-            isChasing = false;
-        }
-
-        if (isChasing)
+        if (IsTargetInRange())
         {
             ChaseTarget();
             if (CanAttack())
@@ -57,11 +46,22 @@ public class Enemy : Unit
         }
     }
 
+    bool IsTargetInRange()
+    {
+        float distanceToTarget = Vector2.Distance(transform.position, target.position);
+        return distanceToTarget <= detectionRange;
+    }
+
     void ChaseTarget()
     {
         Vector2 dirVec = target.position - rigid.position;
         Vector2 nextVec = dirVec.normalized * speed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position + nextVec);
+        rigid.velocity = Vector2.zero;
+    }
+
+    void StopMoving()
+    {
         rigid.velocity = Vector2.zero;
     }
 
@@ -96,8 +96,34 @@ public class Enemy : Unit
         isCooldown = false;
     }
 
-    void StopMoving()
+    public void TakeDamage(float damage)
     {
-        rigid.velocity = Vector2.zero;
+        currentHealth -= damage;
+        float healthPercentage = currentHealth / maxHealth;
+        healthBar.UpdateHealth(healthPercentage);
+        
+        if (currentHealth <= 0f)
+        {
+            Die();
+        }
+    }
+
+    protected virtual void Die()
+    {
+        // 적 사망 시 처리할 내용을 여기에 추가
+        Destroy(gameObject);
+    }
+
+      void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Bullet"))
+        {
+            Bullet bullet = other.GetComponent<Bullet>();
+            if (bullet != null)
+            {
+                TakeDamage(bullet.damage);
+                Destroy(other.gameObject); // 총알 제거
+            }
+        }
     }
 }

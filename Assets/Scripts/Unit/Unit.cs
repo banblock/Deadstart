@@ -11,11 +11,4 @@ public class Unit : MonoBehaviour
         currentHealth = maxHealth;
         healthBar.UpdateHealth(currentHealth / maxHealth);
     }
-
-    void TakeDamage(float damage)
-    {
-        currentHealth -= damage;
-        float healthPercentage = currentHealth / maxHealth;
-        healthBar.UpdateHealth(healthPercentage);
-    }
 }
