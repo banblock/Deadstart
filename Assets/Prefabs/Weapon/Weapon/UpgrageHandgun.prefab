@@ -124,7 +124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7175719387928167800}
-  - component: {fileID: 9179875056963337866}
+  - component: {fileID: 5538611556538605223}
   m_Layer: 0
   m_Name: UpgrageHandgun
   m_TagString: Untagged
@@ -149,7 +149,7 @@ Transform:
   - {fileID: 2008442036988028530}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9179875056963337866
+--- !u!114 &5538611556538605223
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,12 +158,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8869894488803603688}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7944d956ea8dc72459327d29488fa86e, type: 3}
+  m_Script: {fileID: 11500000, guid: baf6e18082049034482397d5eabf49f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 10
   range: 100
-  fireRate: 8
+  fireRate: 2
   spriteRenderer: {fileID: 6202429194478524131}
   bulletPrefab: {fileID: 8564982800525464031, guid: 23733528193e4614ca4907ec1962d232, type: 3}
   ShootStartPoint: {fileID: 2008442036988028530}
+  bulletCount: 4
+  accuracy: 5

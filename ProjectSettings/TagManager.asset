@@ -7,6 +7,8 @@ TagManager:
   - Building
   - Item
   - Projectile
+  - Slot
+  - Enemy
   layers:
   - Default
   - TransparentFX

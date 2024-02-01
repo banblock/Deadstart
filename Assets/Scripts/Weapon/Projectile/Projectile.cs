@@ -2,42 +2,140 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Projectile : MonoBehaviour
 {
     protected ProjectilePoolManager projectilePoolManager;
 
     [SerializeField]
-    protected float projectileSpeed = 10f;  // 총알 이동 속도
+    protected float projectileSpeed = 10f;  // 투사체 속도
     [SerializeField]
-    protected float projectileDamage = 1f;
+    protected float projectileDamage = 1f;  // 투사체 데미지
+    [SerializeField]
+    protected float projectileRange = 10f;  // 투사체 범위
+    private float initialDistance;      // 투사체 발사된 거리
+    [SerializeField]
+    protected int projectilePenetration = 0; //투사체 관통력
+    private int currentProjectilePenetration;
+    [SerializeField]
+    protected MovementType movementType = MovementType.Linear; // 발체체 이동 형태
 
     void Start()
     {
         projectilePoolManager = ProjectilePoolManager.Instance;
     }
 
+    void OnEnable()
+    {
+        SetInit();
+    }
+
     void FixedUpdate()
     {
         MoveBullet();
-        DestroyBullet();
     }
 
+
+    /// <summary>
+    /// 초기 세팅
+    /// </summary>
+    protected virtual void SetInit()
+    {
+        initialDistance = 0f;
+        currentProjectilePenetration = projectilePenetration;
+    }
+
+    /// <summary>
+    /// 투사체 이동
+    /// </summary>
     protected virtual void MoveBullet()
     {
-        transform.Translate(Vector2.right * projectileSpeed * Time.deltaTime);
-    }
+        //투사체 이동 타입 결정
+        switch (movementType) {
+            case MovementType.Linear: 
+                LinearMove();
+                break;
+            case MovementType.EaseIn:
+                EaseInMove();
+                break;
+            case MovementType.EaseOut:
+                EaseOutMove();
+                break;
+        }
+        initialDistance += projectileSpeed * Time.deltaTime;
 
-    protected virtual void DestroyBullet()
-    {
-        if (!IsInScreen()) {
-            projectilePoolManager.ReturnProjectileToPool(this.gameObject);
+        if (initialDistance >= projectileRange || !IsInScreen()) {
+            DestroyBullet();
         }
     }
 
-    protected bool IsInScreen()
+    /// <summary>
+    /// 투사체 충돌
+    /// </summary>
+    /// <param name="other">충돌한 오브젝트</param>
+    void OnTriggerEnter2D(Collider2D other)
     {
-        Vector2 viewportPosition = Camera.main.WorldToViewportPoint(transform.position);
-        return (viewportPosition.x >= 0 && viewportPosition.x <= 1 && viewportPosition.y >= 0 && viewportPosition.y <= 1);
+        if(other.tag == "Enemy") {
+            HitEnemy(other);
+
+            
+        }
     }
 
+    /// <summary>
+    /// 적과 충돌했을 때 동작
+    /// </summary>
+    /// <param name="enemy"> 충돌한 적 </param>
+    protected virtual void HitEnemy(Collider2D enemy)
+    {
+        //enemy.TakeDamage(projectileDamage);
+        currentProjectilePenetration--;
+        if (currentProjectilePenetration < 0) {
+            DestroyBullet();
+        }
+    }
+
+    /// <summary>
+    /// 투사체 삭제 : pool 반환
+    /// </summary>
+    protected virtual void DestroyBullet()
+    {
+        projectilePoolManager.ReturnProjectileToPool(gameObject);
+    }
+    
+
+    /// <summary>
+    /// Private 메서드
+    private void LinearMove()
+    {
+        transform.Translate(projectileSpeed * Time.deltaTime * Vector2.right);
+    }
+
+    private void EaseInMove()
+    {
+        float moveEaseSpeed = projectileSpeed * Mathf.SmoothStep(0f, 1f, Mathf.PingPong(initialDistance / projectileRange, 1f));
+        transform.Translate(moveEaseSpeed * Time.deltaTime * Vector2.right);
+    }
+
+    private void EaseOutMove()
+    {
+        float moveEaseSpeed = projectileSpeed * Mathf.SmoothStep(1f, 0f, Mathf.PingPong(initialDistance / projectileRange, 1f));
+        transform.Translate(moveEaseSpeed * Time.deltaTime * Vector2.right);
+    }
+
+    private bool IsInScreen()
+    {
+        Vector2 viewportPosition = Camera.main.WorldToViewportPoint(transform.position);
+        float margin = 0.1f;
+
+        return (viewportPosition.x >= -margin && viewportPosition.x <= 1 + margin &&
+                viewportPosition.y >= -margin && viewportPosition.y <= 1 + margin);
+    }
+
+    protected enum MovementType
+    {
+        Linear,
+        EaseIn,
+        EaseOut,
+    }
 }

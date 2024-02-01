@@ -5,15 +5,15 @@ using UnityEngine;
 public class RangedWeapon : Weapon
 {
     [SerializeField]
-    private SpriteRenderer spriteRenderer;
+    protected SpriteRenderer spriteRenderer;
 
     [SerializeField]
-    private GameObject bulletPrefab;  // ÃÑ¾Ë ÇÁ¸®ÆÕ
+    protected GameObject bulletPrefab;  // ÃÑ¾Ë ÇÁ¸®ÆÕ
 
     [SerializeField]
-    private Transform ShootStartPoint;
+    protected Transform ShootStartPoint;
 
-    private ProjectilePoolManager projectilePoolManager;
+    protected ProjectilePoolManager projectilePoolManager;
 
     void Update()
     {

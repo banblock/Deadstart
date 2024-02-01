@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6503113745563936716}
-  - component: {fileID: 3707292357565785369}
+  - component: {fileID: 8134767121557448909}
   - component: {fileID: 8374813261719808774}
   - component: {fileID: 5988349289976301586}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: splitBuilet
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +34,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3707292357565785369
+--- !u!114 &8134767121557448909
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,14 +43,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 8564982800525464031}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11a518a450caf644cace669ef45e1632, type: 3}
+  m_Script: {fileID: 11500000, guid: ff2051f11bce7ab4a9b73a870503d5f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 15
+  projectileSpeed: 10
   projectileDamage: 1
   projectileRange: 10
   projectilePenetration: 0
   movementType: 0
+  splitCount: 3
 --- !u!212 &8374813261719808774
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -93,7 +94,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.86415094, g: 0.38296017, b: 0.21359201, a: 1}
+  m_Color: {r: 0.21176471, g: 0.47216624, b: 0.8627451, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -11,6 +11,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private WeaponManager weaponManager;
 
+    private void Awake()
+    {
+        if(Instance == null) {
+            Instance = this;
+        }
+        else {
+            Destroy(Instance);
+        }
+    }
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
