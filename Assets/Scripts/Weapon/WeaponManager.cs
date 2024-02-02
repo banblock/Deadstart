@@ -96,6 +96,9 @@ public class WeaponManager : MonoBehaviour
         }
 
         currentWeapon = Instantiate(weaponPrefab, weaponPosition.position, weaponPosition.rotation, weaponPosition);
+        Weapon weaponComponent = currentWeapon.GetComponent<Weapon>();
+        ActionMode actionMode = ActionManager.instance.ActionMode;
+        weaponComponent.SetAttackEnabled(actionMode);
     }
 
     /// <summary>
