@@ -12,7 +12,7 @@ public enum ActionMode
 
 public class ActionManager : MonoBehaviour
 {
-    public static ActionManager instance { private set; get; }
+    public static ActionManager Instance { private set; get; }
 
     // 이벤트 정의
     public event Action<ActionMode> OnActionModeChanged;
@@ -21,8 +21,8 @@ public class ActionManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null) {
-            instance = this;
+        if (Instance == null) {
+            Instance = this;
         }
         else {
             Destroy(this);

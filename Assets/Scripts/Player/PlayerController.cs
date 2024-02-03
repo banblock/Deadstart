@@ -27,12 +27,19 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
 
+        //weponManager지정
+        if( weaponManager == null ) {
+            weaponManager = WeaponManager.Instance;
+        }
+
         // 플레이어 스탯 초기화
         playerStats = new PlayerStats();
         playerStats.InitializeStats();
 
         // 스탯 업데이트
         UpdatePlayerStats();
+
+       
     }
 
     void Update()

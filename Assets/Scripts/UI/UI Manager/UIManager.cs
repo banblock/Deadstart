@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        actionManager = ActionManager.instance;
+        actionManager = ActionManager.Instance;
     }
 
     void Update()
