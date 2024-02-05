@@ -76,6 +76,7 @@ public class ProjectilePoolManager : MonoBehaviour
         return projectilePool[poolNumber];
     }
 
+
     private GameObject CreateNewProjectile(GameObject prefab, Vector3 position, Quaternion rotation, int poolNumber)
     {
         GameObject newProjectile = Instantiate(prefab, position, rotation, transform);

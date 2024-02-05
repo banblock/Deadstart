@@ -21,6 +21,9 @@ public class MeleeWeapon : Weapon
 
     }
 
+    /// <summary>
+    /// 히트박스 활성화
+    /// </summary>
     private void ActiveHitBox()
     {
         if (hitBox != null) {
@@ -29,6 +32,10 @@ public class MeleeWeapon : Weapon
     }
 
 
+    /// <summary>
+    /// 히트박스 설정 - 임시
+    /// </summary>
+    /// <param name="size">크기</param>
     private void SetHitBoxSize(float size)
     {
         float colliderSize = size * 2f + 1f;

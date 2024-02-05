@@ -45,6 +45,9 @@ public class WeaponUpgradeUI : ToggleableUI
         gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// 무기 업그래이드 정보를 출력합니다
+    /// </summary>
     void DisplayWeaponUpgradeList()
     {
         if(weaponUpgradeDatas == null) {

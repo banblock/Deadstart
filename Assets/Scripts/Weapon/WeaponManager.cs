@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 무기 장착 및 업그레이드 관리
+/// </summary>
 public class WeaponManager : MonoBehaviour
 {
     public static WeaponManager Instance { private set; get; }
@@ -55,7 +58,7 @@ public class WeaponManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 무기 변경
+    /// 무기 변경를 변경합니다
     /// </summary>
     /// <param name="upgradeName"> 무기 이름 </param>
     public void ChangeWeapon(string upgradeName)
@@ -68,7 +71,7 @@ public class WeaponManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 무기 업그레이드 리스트에서 해당하는 번호의 무기 업그레이드 정보를 가져옵니다.
+    /// 무기 업그레이드 리스트에서 해당하는 번호의 무기 업그레이드 정보를 가져옵니다
     /// </summary>
     /// <param name="upgradeName"> 무기 이름 </param>
     /// <returns> 무기 정보 </returns>
@@ -102,7 +105,7 @@ public class WeaponManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 무기 리스트를 가져옵니다.
+    /// 무기 리스트를 가져옵니다
     /// </summary>
     /// <returns> 무기 리스트 </returns>
     public List<WeaponUpgradeData> GetWeaponDataList()

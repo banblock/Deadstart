@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// æ∆¿Ã≈€
+/// </summary>
 [System.Serializable]
 public class Item 
 {

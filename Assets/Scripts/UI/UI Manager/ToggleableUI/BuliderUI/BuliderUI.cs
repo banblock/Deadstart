@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 건설 UI
+/// </summary>
 public class BuilderUI : ToggleableUI
 {
     public static BuilderUI Instace { private set; get; }
@@ -41,6 +44,9 @@ public class BuilderUI : ToggleableUI
         gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// 현재 건설 가능한 건물을 업데이트 합니다
+    /// </summary>
     public void UpdateUI()
     {
         ClearUIContainer();
@@ -60,6 +66,15 @@ public class BuilderUI : ToggleableUI
         }
     }
 
+    /// <summary>
+    /// 행동 모드를 건설 모드로 변경합니다.
+    /// </summary>
+    public void ChangeBuildMode()
+    {
+        ActionManager.Instance.ChangeActionMode(ActionMode.BuildMode);
+        gameObject.SetActive(false);
+    }
+
     private void ClearUIContainer()
     {
         foreach (Transform child in BuliderUIContainer.transform) {
@@ -67,10 +82,5 @@ public class BuilderUI : ToggleableUI
         }
     }
 
-
-    public void ChangeBuildMode()
-    {
-        ActionManager.Instance.ChangeActionMode(ActionMode.BuildMode);
-        gameObject.SetActive(false);
-    }
+    
 }
