@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// 카메라 컨트롤러
+/// </summary>
 public class CameraController : MonoBehaviour
 {
     public Transform target; // 플레이어의 Transform을 연결
