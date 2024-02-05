@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 행동 모드
+/// </summary>
 public enum ActionMode
 {
     AttackMode,
@@ -10,11 +13,13 @@ public enum ActionMode
     NoAction
 }
 
+/// <summary>
+/// 행동 관리자
+/// </summary>
 public class ActionManager : MonoBehaviour
 {
     public static ActionManager Instance { private set; get; }
 
-    // 이벤트 정의
     public event Action<ActionMode> OnActionModeChanged;
 
     public ActionMode ActionMode { private set; get; }
@@ -43,11 +48,15 @@ public class ActionManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 현제 행동 모드를 변경합니다.
+    /// </summary>
+    /// <param name="newMode"> 변경할 행동 모드 </param>
     public void ChangeActionMode(ActionMode newMode)
     {
         if (newMode != ActionMode) {
             ActionMode = newMode;
-            OnActionModeChanged?.Invoke(ActionMode);
+            OnActionModeChanged?.Invoke(ActionMode); // 행동 모드 변경에 등록된 이벤트를 호출
         }
     }
 }

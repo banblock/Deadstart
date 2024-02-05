@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// 플레이어 컨트롤러
+/// </summary>
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance {  get; private set; } 
@@ -53,11 +56,17 @@ public class PlayerController : MonoBehaviour
         MovePlayer();
     }
 
+    /// <summary>
+    /// 플레이어 이동 입력
+    /// </summary>
     private void InputPlayerMove()
     {
         inputVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     }
 
+    /// <summary>
+    /// 플레이어 이동
+    /// </summary>
     private void MovePlayer()
     {
         Vector2 nextVector = inputVector.normalized * playerStats.Speed * Time.fixedDeltaTime;
@@ -69,6 +78,10 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 플레이어 데미지를 받는다
+    /// </summary>
+    /// <param name="damage">플레이어가 받는 데미지</param>
     public void TakeDamage(int damage)
     {
         playerStats.Health -= damage;
@@ -83,6 +96,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 플레이어 사망
+    /// </summary>
     private void Die()
     {
         if(playerStats.Health > 0) {
@@ -90,7 +106,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // 스탯 업데이트 및 UI 텍스트 갱신
+    /// <summary>
+    /// 스탯 업데이트 및 UI 텍스트 갱신
+    /// </summary>
     private void UpdatePlayerStats()
     {
         Debug.Log($"Player Stats: HP - {playerStats.Health}, ATK - {playerStats.Attack}, ATK Speed - {playerStats.AttackSpeed}, Speed - {playerStats.Speed}");

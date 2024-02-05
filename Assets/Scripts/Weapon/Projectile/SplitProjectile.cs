@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// 분열 가능한 투사체
+/// </summary>
 public class SplitProjectile : Projectile
 {
     [SerializeField]
@@ -27,6 +30,9 @@ public class SplitProjectile : Projectile
         }
     }
 
+    /// <summary>
+    /// 투사체 분열
+    /// </summary>
     private void Split()
     {
         for (int i = 0; i < splitCount; i++) {

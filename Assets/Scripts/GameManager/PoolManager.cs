@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 오브젝트 pool을 관리합니다
+/// </summary>
 public class PoolManager : MonoBehaviour
 {
     public static PoolManager Instance { get; private set; }

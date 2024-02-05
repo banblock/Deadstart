@@ -4,6 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 자원 표기 UI
+/// </summary>
 public class ResourceInfoUIComponent : MonoBehaviour
 {
     [SerializeField]

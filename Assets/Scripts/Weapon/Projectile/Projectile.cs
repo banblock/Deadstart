@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/// <summary>
+/// 투사체 오브젝트
+/// </summary>
 public class Projectile : MonoBehaviour
 {
     protected ProjectilePoolManager projectilePoolManager;
@@ -105,24 +107,35 @@ public class Projectile : MonoBehaviour
     
 
     /// <summary>
-    /// Private 메서드
+    /// 투사체 선형이동
+    /// </summary>
     private void LinearMove()
     {
         transform.Translate(projectileSpeed * Time.deltaTime * Vector2.right);
     }
 
+    /// <summary>
+    /// 투사체 EaseIn이동
+    /// </summary>
     private void EaseInMove()
     {
         float moveEaseSpeed = projectileSpeed * Mathf.SmoothStep(0f, 1f, Mathf.PingPong(initialDistance / projectileRange, 1f));
         transform.Translate(moveEaseSpeed * Time.deltaTime * Vector2.right);
     }
 
+    /// <summary>
+    /// 투사체 EaseOut이동
+    /// </summary>
     private void EaseOutMove()
     {
         float moveEaseSpeed = projectileSpeed * Mathf.SmoothStep(1f, 0f, Mathf.PingPong(initialDistance / projectileRange, 1f));
         transform.Translate(moveEaseSpeed * Time.deltaTime * Vector2.right);
     }
 
+    /// <summary>
+    /// 투사체가 스크린 밖으로 나갔는지 판별합니다
+    /// </summary>
+    /// <returns> true = 스크린 밖으로 나감 </returns>
     private bool IsInScreen()
     {
         Vector2 viewportPosition = Camera.main.WorldToViewportPoint(transform.position);

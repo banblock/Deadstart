@@ -74,3 +74,4 @@ crashlytics-build.properties
 
 Assets/JMO Assets.*
 Assets/JMO Assets
+*.cd

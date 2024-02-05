@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 반사 가능한 투사체
+/// </summary>
 public class BouncingProjectile : Projectile
 {
 
