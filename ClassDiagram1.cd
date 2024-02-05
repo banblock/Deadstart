@@ -368,13 +368,6 @@
   </Class>
   <Class Name="Projectile" Collapsed="true">
     <Position X="4" Y="0.5" Width="1.5" />
-    <NestedTypes>
-      <Enum Name="Projectile.MovementType" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Assets\Scripts\Weapon\Projectile\Projectile.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAiAAEBBAQAAAAABCgEAEgMAwAQAASAAACAA=</HashCode>
       <FileName>Assets\Scripts\Weapon\Projectile\Projectile.cs</FileName>
