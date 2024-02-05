@@ -5,11 +5,14 @@ public class PlayerController : MonoBehaviour
     public static PlayerController Instance {  get; private set; } 
 
     [SerializeField]
-    private PlayerStats playerStats;  // 플레이어 스탯 관리 클래스
-    private Rigidbody2D rb;
+    private WeaponManager weaponManager;
+    private Rigidbody2D rigid;
 
     [SerializeField]
-    private WeaponManager weaponManager;
+    private PlayerStats playerStats;  // 플레이어 스탯 관리 클래스
+
+    private Vector2 inputVector;
+
 
     private void Awake()
     {
@@ -21,11 +24,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = 0f;
+        rigid = GetComponent<Rigidbody2D>();
 
         //weponManager지정
         if( weaponManager == null ) {
@@ -44,24 +45,42 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        InputPlayerMove();
+    }
+
+    void FixedUpdate()
+    {
         MovePlayer();
+    }
+
+    private void InputPlayerMove()
+    {
+        inputVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
     }
 
     private void MovePlayer()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-
-        Vector2 movement = new Vector2(horizontalInput, verticalInput);
-        movement.Normalize();
-
-        // 이동 속도에 스탯 적용
-        rb.velocity = movement * playerStats.Speed;
+        Vector2 nextVector = inputVector.normalized * playerStats.Speed * Time.fixedDeltaTime;
+        rigid.MovePosition(rigid.position + nextVector);
     }
 
-    private void TakeDamage(int damage)
+    private void Boost()
+    {
+
+    }
+
+    public void TakeDamage(int damage)
     {
         playerStats.Health -= damage;
+
+        if (playerStats.Health > 0) {
+            // todo : 플레이어 피격
+            
+        }
+        else {
+            // todo : 플레이어 사망
+            Die();
+        }
     }
 
     private void Die()
