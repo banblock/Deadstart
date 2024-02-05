@@ -1,21 +1,19 @@
-using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : Unit
 {
-    public float speed; //이동속도
-    public float detectionRange; //플레이어를 발견하는 범위
-    public float chasingRange; // 수정: 쫓아가는 범위
-    public float attackRange; // 공격 사거리
-    public float attackCooldown = 2f; //공격 쿨다운
-    public float attackDamage = 10f;  //데미지
-    public Rigidbody2D target; // 에네미의 공격대상
-    
+    public float speed;
+    public float detectionRange;
+    public float attackRange;
+    public float attackCooldown = 2f;
+    public float attackDamage = 10f; // 에너미의 공격력
+    public Rigidbody2D target; // 공격 대상
+
     Rigidbody2D rigid;
     SpriteRenderer spriter;
     bool isCooldown = false;
-    bool isChasing = false;
 
     void Awake()
     {
@@ -27,24 +25,14 @@ public class Enemy : Unit
     {
         if (target == null)
         {
+            // 특정 대상이 설정되어 있지 않은 경우, 기본적으로 플레이어를 대상으로 설정
             target = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         }
     }
 
     void Update()
     {
-        float distanceToTarget = Vector2.Distance(transform.position, target.position);
-
-        if (distanceToTarget <= chasingRange) //  쫓아가는 범위 내에 있을 때만 추적
-        {
-            isChasing = true;
-        }
-        else
-        {
-            isChasing = false;
-        }
-
-        if (isChasing)
+        if (IsTargetInRange())
         {
             ChaseTarget();
             if (CanAttack())
@@ -58,9 +46,12 @@ public class Enemy : Unit
         }
     }
 
-/// <summary>
-/// target을 따라가는 메소드
-/// </summary>
+    bool IsTargetInRange()
+    {
+        float distanceToTarget = Vector2.Distance(transform.position, target.position);
+        return distanceToTarget <= detectionRange;
+    }
+
     void ChaseTarget()
     {
         Vector2 dirVec = target.position - rigid.position;
@@ -69,10 +60,11 @@ public class Enemy : Unit
         rigid.velocity = Vector2.zero;
     }
 
-/// <summary>
-/// 대상을 공격가능한지 확인하는 메소드
-/// </summary>
-/// <returns> boolean </returns>
+    void StopMoving()
+    {
+        rigid.velocity = Vector2.zero;
+    }
+
     bool CanAttack()
     {
         if (isCooldown)
@@ -84,9 +76,6 @@ public class Enemy : Unit
         return distanceToTarget <= attackRange;
     }
 
-/// <summary>
-/// 대상을 공격, 미완성
-/// </summary>
     void AttackTarget()
     {
         // 대상에게 데미지를 입히기
@@ -100,10 +89,6 @@ public class Enemy : Unit
         StartCoroutine(AttackCooldownCoroutine());
     }
 
-/// <summary>
-/// 공격 쿨다운을 잰다 attacktarget에 사용
-/// </summary>
-/// <returns>IEnumerator</returns>
     IEnumerator AttackCooldownCoroutine()
     {
         isCooldown = true;
@@ -111,39 +96,34 @@ public class Enemy : Unit
         isCooldown = false;
     }
 
-/// <summary>
-/// target이 chaserange밖으로 이동했을경우 멈추기 위한 메소드
-/// </summary>
-    void StopMoving()
+    public void TakeDamage(float damage)
     {
-        rigid.velocity = Vector2.zero;
-    }
-
-    public override void TakeDamage(float damage)
-    {
-        base.TakeDamage(damage);
-    }
-
-/// <summary>
-/// collider가 부딪히면 수행
-/// </summary>
-/// <param name="other"></param>
-   void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Projectile"))
+        currentHealth -= damage;
+        float healthPercentage = currentHealth / maxHealth;
+        healthBar.UpdateHealth(healthPercentage);
+        
+        if (currentHealth <= 0f)
         {
-            // "Projectile" 태그를 가진 오브젝트에 대해서만 처리
-            TakeDamage(other.GetComponent<Bullet>().damage);
-            Destroy(other.gameObject); // 총알 제거
+            Die();
         }
     }
 
-/// <summary>
-/// 적 사망 시 처리할 내용을 여기에 추가
-/// </summary>
-     protected virtual void Die()
+    protected virtual void Die()
     {
-        
+        // 적 사망 시 처리할 내용을 여기에 추가
         Destroy(gameObject);
+    }
+
+      void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Bullet"))
+        {
+            Bullet bullet = other.GetComponent<Bullet>();
+            if (bullet != null)
+            {
+                TakeDamage(bullet.damage);
+                Destroy(other.gameObject); // 총알 제거
+            }
+        }
     }
 }

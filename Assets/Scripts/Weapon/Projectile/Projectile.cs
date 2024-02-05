@@ -7,7 +7,7 @@ public class Projectile : MonoBehaviour
     protected ProjectilePoolManager projectilePoolManager;
 
     [SerializeField]
-    protected float projectileSpeed = 10f;  // ï¿½Ñ¾ï¿½ ï¿½Ìµï¿½ ï¿½Óµï¿½
+    protected float projectileSpeed = 10f;  // ÃÑ¾Ë ÀÌµ¿ ¼Óµµ
     [SerializeField]
     protected float projectileDamage = 1f;
 
