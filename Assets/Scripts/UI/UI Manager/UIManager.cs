@@ -13,8 +13,9 @@ public class UIManager : MonoBehaviour
     }
     public ToggleableUIContainer[] ToggleableUIs;
     private ToggleableUI currentOpenUI;
+    private ActionManager actionManager;
 
-    private void Awake()
+    void Awake()
     {
         if (Instance == null) {
             Instance = this;
@@ -25,7 +26,12 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    void Start()
+    {
+        actionManager = ActionManager.Instance;
+    }
+
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             CloseCurrentUI();
@@ -33,21 +39,22 @@ public class UIManager : MonoBehaviour
 
         foreach (ToggleableUIContainer uiContainer in ToggleableUIs) {
             if (Input.GetKeyDown(uiContainer.keyCode)) {
-                OpenUI(uiContainer.ToggleableUI);
+                if (uiContainer.ToggleableUI != currentOpenUI) {
+                    CloseCurrentUI();
+                    OpenUI(uiContainer.ToggleableUI);
+                }
+                else {
+                    CloseCurrentUI();
+                }
             }
         }
     }
 
     private void OpenUI(ToggleableUI uiToOpen)
     {
-        if (currentOpenUI != uiToOpen) {
-            CloseCurrentUI();
-            uiToOpen.OpenUI();
-            currentOpenUI = uiToOpen;
-        }
-        else {
-            CloseCurrentUI();
-        }
+        uiToOpen.OpenUI();
+        currentOpenUI = uiToOpen;
+        actionManager.ChangeActionMode(ActionMode.NoAction);
     }
 
     private void CloseUI(ToggleableUI uiToClose)
@@ -57,11 +64,10 @@ public class UIManager : MonoBehaviour
 
     public void CloseCurrentUI()
     {
+        actionManager.ChangeActionMode(ActionMode.AttackMode);
         if (currentOpenUI != null) {
             CloseUI(currentOpenUI);
             currentOpenUI = null;
         }
     }
-
-
 }
