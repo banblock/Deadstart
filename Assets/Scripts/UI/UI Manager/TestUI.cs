@@ -13,8 +13,8 @@ public class TestUI : MonoBehaviour
 
     private void Start()
     {
-        ActionManager.instance.OnActionModeChanged += SetLogText;
-        ChangeText(ActionManager.instance.ActionMode.ToString());
+        ActionManager.Instance.OnActionModeChanged += SetLogText;
+        ChangeText(ActionManager.Instance.ActionMode.ToString());
     }
 
     public void SetLogText(ActionMode action)
@@ -31,6 +31,6 @@ public class TestUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        ActionManager.instance.OnActionModeChanged -= SetLogText;
+        ActionManager.Instance.OnActionModeChanged -= SetLogText;
     }
 }

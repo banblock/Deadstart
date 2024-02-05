@@ -32,7 +32,7 @@ public class Weapon : MonoBehaviour
 
     protected virtual void InitSetting()
     {
-        ActionManager.instance.OnActionModeChanged += SetAttackEnabled;
+        ActionManager.Instance.OnActionModeChanged += SetAttackEnabled;
     }
 
     protected virtual void PerformAttack()
@@ -47,6 +47,6 @@ public class Weapon : MonoBehaviour
 
     void OnDestroy()
     {
-        ActionManager.instance.OnActionModeChanged -= SetAttackEnabled;
+        ActionManager.Instance.OnActionModeChanged -= SetAttackEnabled;
     }
 }

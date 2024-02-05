@@ -12,7 +12,6 @@ public class ScriptableObjectsManager : MonoBehaviour
         // ΩÃ±€≈Ê ¿ŒΩ∫≈œΩ∫ º≥¡§
         if (Instance == null) {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else {
             Destroy(gameObject);

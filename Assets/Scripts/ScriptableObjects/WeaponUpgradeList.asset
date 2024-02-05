@@ -16,7 +16,13 @@ MonoBehaviour:
   - name: 01-01
     weaponPrefab: {fileID: 4216221775241072926, guid: b0c95474d7bb4d24b8b45c8d97c070d2, type: 3}
     sprite: {fileID: 1352276880, guid: 3ffdd5f568cf3734186e2c8015f7831d, type: 3}
-    requiredUpgrades: []
+    requiredUpgrades:
+    - Sprite: {fileID: 21300006, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
+      Name: 1
+      amount: 10
+    - Sprite: {fileID: 21300010, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
+      Name: 1
+      amount: 10
     nextUpgrade:
     - 01-02
     previousUpgrade: []
@@ -25,10 +31,10 @@ MonoBehaviour:
     sprite: {fileID: -2099173206, guid: 3ffdd5f568cf3734186e2c8015f7831d, type: 3}
     requiredUpgrades:
     - Sprite: {fileID: 21300026, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
-      Name: 
+      Name: 1
       amount: 10
     - Sprite: {fileID: 21300028, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
-      Name: 
+      Name: 1
       amount: 10
     nextUpgrade:
     - 01-03-1
@@ -37,7 +43,13 @@ MonoBehaviour:
   - name: 01-03-1
     weaponPrefab: {fileID: 8869894488803603688, guid: 17fd1d01d2b6d904e8e323b4c7034d1c, type: 3}
     sprite: {fileID: 587834390, guid: 3ffdd5f568cf3734186e2c8015f7831d, type: 3}
-    requiredUpgrades: []
+    requiredUpgrades:
+    - Sprite: {fileID: 21300010, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
+      Name: 
+      amount: 10
+    - Sprite: {fileID: 21300004, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
+      Name: 
+      amount: 10
     nextUpgrade:
     - 01-03
     - 01-04
