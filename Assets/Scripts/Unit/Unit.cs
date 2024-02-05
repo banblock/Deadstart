@@ -1,5 +1,5 @@
 using UnityEngine;
-public class Unit : MonoBehaviour
+public class Unit : Health
 {
     public float maxHealth = 100f;
     private float currentHealth;

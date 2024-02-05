@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3707292357565785369}
   - component: {fileID: 8374813261719808774}
   - component: {fileID: 5988349289976301586}
+
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Projectile
@@ -51,6 +52,7 @@ MonoBehaviour:
   projectileRange: 10
   projectilePenetration: 0
   movementType: 0
+
 --- !u!212 &8374813261719808774
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -138,3 +140,4 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.16, y: 0.15}
   m_Direction: 1
+
