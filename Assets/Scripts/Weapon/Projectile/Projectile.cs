@@ -77,10 +77,15 @@ public class Projectile : MonoBehaviour
     /// <param name="other">충돌한 오브젝트</param>
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Enemy") {
-            HitEnemy(other);
-
-            
+        switch (other.tag) {
+            case "Enemy":
+                HitEnemy(other);
+                break;
+            case "Building":
+                HitBuilding(other);
+                break;
+            default:
+                break;
         }
     }
 
@@ -95,6 +100,15 @@ public class Projectile : MonoBehaviour
         if (currentProjectilePenetration < 0) {
             DestroyBullet();
         }
+    }
+
+    /// <summary>
+    /// 건물과 충돌
+    /// </summary>
+    /// <param name="enemy"> 충돌한 건물 </param>
+    protected virtual void HitBuilding(Collider2D enemy)
+    {
+        DestroyBullet();
     }
 
     /// <summary>
