@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f74b6808af789fb4b8b4ff70ebcfc4ed, type: 3}
+  m_Name: WeaponUpgradeList
+  m_EditorClassIdentifier: 
+  upgradeDatas:
+  - name: 01-01
+    weaponPrefab: {fileID: 4216221775241072926, guid: b0c95474d7bb4d24b8b45c8d97c070d2, type: 3}
+    sprite: {fileID: 1352276880, guid: 3ffdd5f568cf3734186e2c8015f7831d, type: 3}
+    requiredUpgrades:
+    - Sprite: {fileID: 21300006, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
+      Name: 1
+      amount: 10
+    - Sprite: {fileID: 21300010, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
+      Name: 1
+      amount: 10
+    nextUpgrade:
+    - 01-02
+    previousUpgrade: []
+  - name: 01-02
+    weaponPrefab: {fileID: 8869894488803603688, guid: 9e19e12d87ed6e440815174ac278912c, type: 3}
+    sprite: {fileID: -2099173206, guid: 3ffdd5f568cf3734186e2c8015f7831d, type: 3}
+    requiredUpgrades:
+    - Sprite: {fileID: 21300026, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
+      Name: 1
+      amount: 10
+    - Sprite: {fileID: 21300028, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
+      Name: 1
+      amount: 10
+    nextUpgrade:
+    - 01-03-1
+    - 01-03-2
+    previousUpgrade: []
+  - name: 01-03-1
+    weaponPrefab: {fileID: 8869894488803603688, guid: 17fd1d01d2b6d904e8e323b4c7034d1c, type: 3}
+    sprite: {fileID: 587834390, guid: 3ffdd5f568cf3734186e2c8015f7831d, type: 3}
+    requiredUpgrades:
+    - Sprite: {fileID: 21300010, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
+      Name: 
+      amount: 10
+    - Sprite: {fileID: 21300004, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
+      Name: 
+      amount: 10
+    nextUpgrade:
+    - 01-03
+    - 01-04
+    previousUpgrade: []
+  - name: 01-03-2
+    weaponPrefab: {fileID: 8869894488803603688, guid: 1ad02b96225afcf43965648a7f7aef68, type: 3}
+    sprite: {fileID: -1384787349, guid: 3ffdd5f568cf3734186e2c8015f7831d, type: 3}
+    requiredUpgrades: []
+    nextUpgrade:
+    - 01-03
+    - 01-04
+    previousUpgrade: []
+  - name: 01-03-3
+    weaponPrefab: {fileID: 8869894488803603688, guid: a63585d528f8afe45868e44e67de81c3, type: 3}
+    sprite: {fileID: -508705453, guid: 3ffdd5f568cf3734186e2c8015f7831d, type: 3}
+    requiredUpgrades: []
+    nextUpgrade:
+    - 01-03
+    - 01-04
+    previousUpgrade: []
