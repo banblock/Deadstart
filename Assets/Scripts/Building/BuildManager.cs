@@ -41,7 +41,7 @@ public class BuildManager : MonoBehaviour
         buildTilemapTools = new TileMapTools();
         buildingGuid = GameObject.Find("Guid");
         buildingGuid.SetActive(false);
-        ActionManager.instance.OnActionModeChanged += ToggleBuildMode;
+        ActionManager.Instance.OnActionModeChanged += ToggleBuildMode;
     }
 
     // Update is called once per frame
@@ -58,7 +58,7 @@ public class BuildManager : MonoBehaviour
                         building = buildings[0];
                         building.DrawBuilding(tilemap, tilemapPos);
                         SetBuildingTrigger(building);
-                        ActionManager.instance.ChangeActionMode(ActionMode.AttackMode);
+                        ActionManager.Instance.ChangeActionMode(ActionMode.AttackMode);
                         buildingGuid.SetActive(false);
                         break;
                 }
@@ -140,7 +140,7 @@ public class BuildManager : MonoBehaviour
     
     void OnDestroy()
     {
-        ActionManager.instance.OnActionModeChanged -= ToggleBuildMode;
+        ActionManager.Instance.OnActionModeChanged -= ToggleBuildMode;
     }
 }
 
