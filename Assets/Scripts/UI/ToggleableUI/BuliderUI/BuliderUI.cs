@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// �Ǽ� UI
+/// 건설 UI
 /// </summary>
 public class BuilderUI : ToggleableUI
 {
     public static BuilderUI Instace { private set; get; }
 
     [SerializeField]
-    VerticalLayoutGroup BuliderUIContainer;
+    HorizontalOrVerticalLayoutGroup BuliderUIContainer;
     [SerializeField]
     GameObject bulidingUIButtonPrefab;
     [SerializeField]
@@ -45,7 +45,7 @@ public class BuilderUI : ToggleableUI
     }
 
     /// <summary>
-    /// ���� �Ǽ� ������ �ǹ��� ������Ʈ �մϴ�
+    /// 건설 목록을 업데이트 합니다.
     /// </summary>
     public void UpdateUI()
     {
@@ -67,7 +67,7 @@ public class BuilderUI : ToggleableUI
     }
 
     /// <summary>
-    /// �ൿ ��带 �Ǽ� ���� �����մϴ�.
+    /// 행동 모드를 변경합니다.
     /// </summary>
     public void ChangeBuildMode()
     {
