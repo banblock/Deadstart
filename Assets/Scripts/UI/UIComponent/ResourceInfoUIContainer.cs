@@ -16,9 +16,6 @@ public class ResourceInfoUIContainer : MonoBehaviour
     }
 
     public void SetInitUI(List<Item> items) {
-        //Instantiate(resourceInfoUIComponentPrefab);
-
-        Debug.Log(items.Count);
 
         foreach (Item item in items)
         {

@@ -18,11 +18,16 @@ MonoBehaviour:
     name: SampleBuilding01
     comment: Awesome!
     requiredResources:
-    - resourceName: 0
-      currentAmount: 0
-      maxAmount: 0
+    - Sprite: {fileID: 21300024, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
+      Name: 
+      amount: 10
+    - Sprite: {fileID: 21300030, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
+      Name: 
+      amount: 10
+    category: 
   - buildingPrefab: {fileID: 0}
     sprite: {fileID: 21300000, guid: 36a793bbf119a2a4e900895206cb2891, type: 3}
     name: SampleBuilding02
     comment: Good!
     requiredResources: []
+    category: 
