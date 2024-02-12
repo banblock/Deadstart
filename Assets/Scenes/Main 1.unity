@@ -900,9 +900,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   healthBar: {fileID: 1992852310}
+  maxHealth: 100
+  healthBar: {fileID: 1992852310}
   speed: 2
   detectionRange: 1
-  chasingRange: 2
   attackRange: 0
   attackCooldown: 2
   attackDamage: 10
