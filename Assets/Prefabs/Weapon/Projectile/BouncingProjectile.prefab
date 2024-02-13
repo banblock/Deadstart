@@ -52,7 +52,7 @@ MonoBehaviour:
   projectileRange: 10
   projectilePenetration: 0
   movementType: 0
-  bounceForce: 10
+  bounceSpread: 80
 --- !u!212 &8374813261719808774
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -148,7 +148,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8564982800525464031}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

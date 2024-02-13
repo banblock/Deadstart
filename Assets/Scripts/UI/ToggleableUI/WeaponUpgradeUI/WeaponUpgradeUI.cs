@@ -54,7 +54,7 @@ public class WeaponUpgradeUI : ToggleableUI
             Debug.LogError("무기 리스트가 없습니다.");
             return;
         }
-        Debug.Log(weaponUpgradeDatas + "/" + weaponUpgradeDatas.Count);
+        
         foreach (WeaponUpgradeData upgradeData in weaponUpgradeDatas)
         {
             GameObject buttonUI = Instantiate(weaponUpgradeButtonPrefab, weaponUpgradeButtonPos);

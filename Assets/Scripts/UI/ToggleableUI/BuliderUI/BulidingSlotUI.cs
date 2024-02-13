@@ -17,7 +17,7 @@ public class BuildingSlotUI : MonoBehaviour
     [SerializeField]
     TMP_Text bulidingCommentText;
     [SerializeField]
-    HorizontalLayoutGroup resourceUIContainers;
+    ResourceInfoUIContainer ResourceInfoUIContainer;
 
     BuilderUI BuilderUI;
     BuildingData buliding;
@@ -37,6 +37,7 @@ public class BuildingSlotUI : MonoBehaviour
         bulidingImage.sprite = bulidingData.sprite;
         bulidingNameText.text = bulidingData.name;
         bulidingCommentText.text = bulidingData.comment;
+        ResourceInfoUIContainer.SetInitUI(bulidingData.requiredResources);
     }
 
     /// <summary>

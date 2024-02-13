@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Åõ»çÃ¼ ¿ÀºêÁ§Æ®
+/// íˆ¬ì‚¬ì²´
 /// </summary>
 public class Projectile : MonoBehaviour
 {
     protected ProjectilePoolManager projectilePoolManager;
 
     [SerializeField]
-    protected float projectileSpeed = 10f;  // Åõ»çÃ¼ ¼Óµµ
+    protected float projectileSpeed = 10f;  // íˆ¬ì‚¬ì²´ ìŠ¤í”¼ë“œ
     [SerializeField]
-    protected float projectileDamage = 1f;  // Åõ»çÃ¼ µ¥¹ÌÁö
+    protected float projectileDamage = 1f;  // íˆ¬ì‚¬ì²´ ë°ë¯¸ì§€
     [SerializeField]
-    protected float projectileRange = 10f;  // Åõ»çÃ¼ ¹üÀ§
-    private float initialDistance;      // Åõ»çÃ¼ ¹ß»çµÈ °Å¸®
+    protected float projectileRange = 10f;  // íˆ¬ì‚¬ì²´ ë²”ìœ„
+    private float initialDistance;
     [SerializeField]
-    protected int projectilePenetration = 0; //Åõ»çÃ¼ °üÅë·Â
+    protected int projectilePenetration = 0; // íˆ¬ì‚¬ì²´ ê´€í†µë ¥
     private int currentProjectilePenetration;
     [SerializeField]
-    protected MovementType movementType = MovementType.Linear; // ¹ßÃ¼Ã¼ ÀÌµ¿ ÇüÅÂ
+    protected MovementType movementType = MovementType.Linear; // íˆ¬ì‚¬ì²´ ì´ë™ íƒ€ì…
 
     void Start()
     {
@@ -39,7 +39,7 @@ public class Projectile : MonoBehaviour
 
 
     /// <summary>
-    /// ÃÊ±â ¼¼ÆÃ
+    /// íˆ¬ì‚¬ì²´ ê¸°ë³¸ ì„¸íŒ…
     /// </summary>
     protected virtual void SetInit()
     {
@@ -48,11 +48,11 @@ public class Projectile : MonoBehaviour
     }
 
     /// <summary>
-    /// Åõ»çÃ¼ ÀÌµ¿
+    /// íˆ¬ì‚¬ì²´ ì´ë™
     /// </summary>
     protected virtual void MoveBullet()
     {
-        //Åõ»çÃ¼ ÀÌµ¿ Å¸ÀÔ °áÁ¤
+        //íˆ¬ì‚¬ì²´ ì´ë™ íƒ€ì…ì— ë”°ë¥¸ ì´ë™ ëª¨ì…˜
         switch (movementType) {
             case MovementType.Linear: 
                 LinearMove();
@@ -72,23 +72,28 @@ public class Projectile : MonoBehaviour
     }
 
     /// <summary>
-    /// Åõ»çÃ¼ Ãæµ¹
+    /// íˆ¬ì‚¬ì²´ ì¶©ëŒ
     /// </summary>
-    /// <param name="other">Ãæµ¹ÇÑ ¿ÀºêÁ§Æ®</param>
+    /// <param name="other">ì¶©ëŒ ì˜¤ë¸Œì íŠ¸ ì½œë¼ì´ë”</param>
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Enemy") {
-            HitEnemy(other);
-
-            
+        switch (other.tag) {
+            case "Enemy":
+                HitEnemy(other);
+                break;
+            case "Building":
+                HitBuilding(other);
+                break;
+            default:
+                break;
         }
     }
 
     /// <summary>
-    /// Àû°ú Ãæµ¹ÇßÀ» ¶§ µ¿ÀÛ
+    /// ì ê³¼ ì¶©ëŒí•œ ê²½ìš°
     /// </summary>
-    /// <param name="enemy"> Ãæµ¹ÇÑ Àû </param>
-    protected virtual void HitEnemy(Collider2D enemy)
+    /// <param name="enemy"> ì¶©ëŒí•œ ì </param>
+    protected virtual void HitEnemy(Collider2D enemyCollider)
     {
         //enemy.TakeDamage(projectileDamage);
         currentProjectilePenetration--;
@@ -98,7 +103,17 @@ public class Projectile : MonoBehaviour
     }
 
     /// <summary>
-    /// Åõ»çÃ¼ »èÁ¦ : pool ¹İÈ¯
+
+    /// ï¿½Ç¹ï¿½ï¿½ï¿½ ï¿½æµ¹
+    /// </summary>
+    /// <param name="enemy"> ï¿½æµ¹ï¿½ï¿½ ï¿½Ç¹ï¿½ </param>
+    protected virtual void HitBuilding(Collider2D enemy)
+    {
+        DestroyBullet();
+    }
+
+    /// <summary>
+    /// íˆ¬ì‚¬ì²´ íŒŒê´´ : pool ë°˜í™˜
     /// </summary>
     protected virtual void DestroyBullet()
     {
@@ -107,7 +122,7 @@ public class Projectile : MonoBehaviour
     
 
     /// <summary>
-    /// Åõ»çÃ¼ ¼±ÇüÀÌµ¿
+    /// íˆ¬ì‚¬ì²´ ì„ í˜•ì´ë™
     /// </summary>
     private void LinearMove()
     {
@@ -115,7 +130,7 @@ public class Projectile : MonoBehaviour
     }
 
     /// <summary>
-    /// Åõ»çÃ¼ EaseInÀÌµ¿
+    /// íˆ¬ì‚¬ì²´ EaseInì´ë™
     /// </summary>
     private void EaseInMove()
     {
@@ -124,7 +139,7 @@ public class Projectile : MonoBehaviour
     }
 
     /// <summary>
-    /// Åõ»çÃ¼ EaseOutÀÌµ¿
+    /// íˆ¬ì‚¬ì²´ EaseOutì´ë™
     /// </summary>
     private void EaseOutMove()
     {
@@ -133,9 +148,9 @@ public class Projectile : MonoBehaviour
     }
 
     /// <summary>
-    /// Åõ»çÃ¼°¡ ½ºÅ©¸° ¹ÛÀ¸·Î ³ª°¬´ÂÁö ÆÇº°ÇÕ´Ï´Ù
+    /// íˆ¬ì‚¬ì²´ ìŠ¤í¬ë¦° ë°–ìœ¼ë¡œ ë‚˜ê°”ëŠ”ì§€ ì²´í¬
     /// </summary>
-    /// <returns> true = ½ºÅ©¸° ¹ÛÀ¸·Î ³ª°¨ </returns>
+    /// <returns> true = ìŠ¤í¬ë¦° ë°–ìœ¼ë¡œ ë‚˜ê° </returns>
     private bool IsInScreen()
     {
         Vector2 viewportPosition = Camera.main.WorldToViewportPoint(transform.position);

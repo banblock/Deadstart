@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// °Ç¼³ UI
+/// ê±´ì„¤ UI
 /// </summary>
 public class BuilderUI : ToggleableUI
 {
     public static BuilderUI Instace { private set; get; }
 
     [SerializeField]
-    VerticalLayoutGroup BuliderUIContainer;
+    HorizontalOrVerticalLayoutGroup BuliderUIContainer;
     [SerializeField]
     GameObject bulidingUIButtonPrefab;
     [SerializeField]
@@ -40,12 +40,12 @@ public class BuilderUI : ToggleableUI
 
     public override void CloseUI()
     {
-       
+
         gameObject.SetActive(false);
     }
 
     /// <summary>
-    /// ÇöÀç °Ç¼³ °¡´ÉÇÑ °Ç¹°À» ¾÷µ¥ÀÌÆ® ÇÕ´Ï´Ù
+    /// ê±´ì„¤ ëª©ë¡ì„ ì—…ë°ì´íŠ¸ í•©ë‹ˆë‹¤.
     /// </summary>
     public void UpdateUI()
     {
@@ -67,7 +67,7 @@ public class BuilderUI : ToggleableUI
     }
 
     /// <summary>
-    /// Çàµ¿ ¸ğµå¸¦ °Ç¼³ ¸ğµå·Î º¯°æÇÕ´Ï´Ù.
+    /// í–‰ë™ ëª¨ë“œë¥¼ ë³€ê²½í•©ë‹ˆë‹¤.
     /// </summary>
     public void ChangeBuildMode()
     {
@@ -82,5 +82,4 @@ public class BuilderUI : ToggleableUI
         }
     }
 
-    
 }
