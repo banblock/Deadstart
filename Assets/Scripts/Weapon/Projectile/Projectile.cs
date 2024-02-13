@@ -95,7 +95,8 @@ public class Projectile : MonoBehaviour
     /// <param name="enemy"> 충돌한 적</param>
     protected virtual void HitEnemy(Collider2D enemyCollider)
     {
-        //enemy.TakeDamage(projectileDamage);
+        Enemy enemy = enemyCollider.GetComponent<Enemy>();
+        enemy.TakeDamage(projectileDamage);
         currentProjectilePenetration--;
         if (currentProjectilePenetration < 0) {
             DestroyBullet();

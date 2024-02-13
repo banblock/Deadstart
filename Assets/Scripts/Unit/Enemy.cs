@@ -96,34 +96,18 @@ public class Enemy : Unit
         isCooldown = false;
     }
 
-    public void TakeDamage(float damage)
+   
+    public override void TakeDamage(float damage)
     {
-        currentHealth -= damage;
-        float healthPercentage = currentHealth / maxHealth;
-        healthBar.UpdateHealth(healthPercentage);
-        
-        if (currentHealth <= 0f)
-        {
-            Die();
-        }
+        Debug.Log("데미지를 받았습니다! :" + damage);
+        base.TakeDamage(damage);
+        // todo: Enemy가 데미지를 받을떄 실행 로직
     }
 
-    protected virtual void Die()
+    protected override void Die()
     {
-        // 적 사망 시 처리할 내용을 여기에 추가
-        Destroy(gameObject);
+        base.Die();
     }
 
-      void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Bullet"))
-        {
-            Bullet bullet = other.GetComponent<Bullet>();
-            if (bullet != null)
-            {
-                TakeDamage(bullet.damage);
-                Destroy(other.gameObject); // 총알 제거
-            }
-        }
-    }
+
 }
