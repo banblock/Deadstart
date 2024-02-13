@@ -12163,6 +12163,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1754766986}
     m_Modifications:
+    - target: {fileID: 6902912454512837419, guid: a9a9764170c4c6f45a8d4d9c6889038b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6902912454512837419, guid: a9a9764170c4c6f45a8d4d9c6889038b, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6902912454512837419, guid: a9a9764170c4c6f45a8d4d9c6889038b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6902912454512837419, guid: a9a9764170c4c6f45a8d4d9c6889038b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6962573074468871823, guid: a9a9764170c4c6f45a8d4d9c6889038b, type: 3}
       propertyPath: m_Name
       value: BuliderUI
@@ -17632,6 +17648,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2104412720}
+  - component: {fileID: 2104412721}
   m_Layer: 0
   m_Name: ___[Object]
   m_TagString: Untagged
@@ -17655,6 +17672,18 @@ Transform:
   - {fileID: 1897821548}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2104412721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104412719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba035b475b4aa9449138b18c68ae1a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2107854518
 GameObject:
   m_ObjectHideFlags: 0

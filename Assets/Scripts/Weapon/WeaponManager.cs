@@ -9,14 +9,21 @@ public class WeaponManager : MonoBehaviour
 {
     public static WeaponManager Instance { private set; get; }
 
-    public GameObject initialWeaponPrefab;
-    private GameObject currentWeapon;
+    public GameObject initialWeaponPrefab; //기본무기
+    private GameObject currentWeapon; //현재무기
 
     [SerializeField]
-    Transform weaponPosition;
+    Transform weaponPosition; //무기 장착 위치
 
     [SerializeField]
-    WeaponUpgradeList upgradeOptions;
+    WeaponUpgradeList upgradeOptions; //업그레이드 가능 옵션
+
+    //현제 업그레이드된 무기 정보 저장
+    List<string> weaponUpgrade = new List<string>();
+
+    WeaponUpgrageManager WeaponUpgrageManager;
+
+
 
     private void Awake()
     {
@@ -31,10 +38,10 @@ public class WeaponManager : MonoBehaviour
     void Start()
     {
         if(weaponPosition == null ) {
-
+            //무기 장착 위치를 플레이어로 설정
             weaponPosition = PlayerController.Instance.transform;
         }
-
+        //기본무기 장착
         EquipWeapon(initialWeaponPrefab);
     }
 
@@ -56,6 +63,12 @@ public class WeaponManager : MonoBehaviour
             ChangeWeapon("01-03-3");
         }
     }
+
+    public void UpgradeWeapon()
+    {
+        
+    }
+
 
     /// <summary>
     /// 무기 변경를 변경합니다
@@ -112,5 +125,21 @@ public class WeaponManager : MonoBehaviour
     {
         return upgradeOptions.upgradeDatas;
     }
+
+}
+
+public class WeaponUpgrageManager
+{
+    // 이미 업그레이드 된 정보들...
+    WeaponUpgradeList upgradeOptions;
+    // 전체 업그레이드 정보
+    Dictionary<string, WeaponUpgradeData> upgradeDictionary;
+
+    public WeaponUpgradeData GetUpgradeData(string id)
+    {
+        return upgradeDictionary[id];
+    }
+
+
 
 }

@@ -13,6 +13,20 @@ public class WeaponUpgradeData
     public GameObject weaponPrefab;
     public Sprite sprite;
     public List<Item> requiredUpgrades;
-    public List<string> nextUpgrade;
-    public List<string> previousUpgrade;
+    public UpgradeStpeData nextUpgrade;
+    public UpgradeStpeData previousUpgrade;
+
 }
+
+[System.Serializable]
+public class UpgradeStpeData
+{
+    public enum SelectType
+    {
+        OR,
+        AND
+    }
+    public List<string> upgradeId;
+    public SelectType selectType;
+}
+

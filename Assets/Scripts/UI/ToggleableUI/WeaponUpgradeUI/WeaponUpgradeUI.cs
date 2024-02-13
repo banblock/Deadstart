@@ -14,8 +14,12 @@ public class WeaponUpgradeUI : ToggleableUI
     private Transform weaponUpgradeButtonPos;
 
     private WeaponManager weaponManager;
-    
-    private List<WeaponUpgradeData> weaponUpgradeDatas;
+    private List<WeaponUpgradeData> weaponUpgradeDatas; //무기 업그레이드 정보를 가져옴
+
+    private List<string> upgradeWeapons; // 업그레이드가 완료된 정보
+    //매번 업그레이드 정보를 갱신하기 보다는 갱신하고 최소환으로 갱신하는 것이 베스트
+
+
 
     private void Awake()
     {
@@ -45,6 +49,18 @@ public class WeaponUpgradeUI : ToggleableUI
         gameObject.SetActive(false);
     }
 
+    void UpdateUpgradeButton()
+    {
+        // 일단 시작 부분부터 활성화
+        // 다음 업그레이드 탐색
+        // 
+        // 다음 업그레이드로 이동
+        // 
+
+    }
+
+
+
     /// <summary>
     /// 무기 업그래이드 정보를 출력합니다
     /// </summary>
@@ -61,8 +77,9 @@ public class WeaponUpgradeUI : ToggleableUI
             WeaponUpgradeButtonUI upgradeButtonUI = buttonUI.GetComponent<WeaponUpgradeButtonUI>();
             upgradeButtonUI.SetInitUI(upgradeData);
             weaponUpgradeButtonList.Add(buttonUI);
-            
         }
     }
+
+
 
 }
