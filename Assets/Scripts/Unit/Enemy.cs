@@ -21,10 +21,12 @@ public class Enemy : Unit
         spriter = GetComponent<SpriteRenderer>();
     }
 
-    void Start()
+
+
+    protected override void SetInit()
     {
-        if (target == null)
-        {
+        base.SetInit();
+        if (target == null) {
             // 특정 대상이 설정되어 있지 않은 경우, 기본적으로 플레이어를 대상으로 설정
             target = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         }
@@ -96,34 +98,18 @@ public class Enemy : Unit
         isCooldown = false;
     }
 
-    public void TakeDamage(float damage)
+   
+    public override void TakeDamage(float damage)
     {
-        currentHealth -= damage;
-        float healthPercentage = currentHealth / maxHealth;
-        healthBar.UpdateHealth(healthPercentage);
-        
-        if (currentHealth <= 0f)
-        {
-            Die();
-        }
+        Debug.Log("데미지를 받았습니다! :" + damage);
+        base.TakeDamage(damage);
+        // todo: Enemy가 데미지를 받을떄 실행 로직
     }
 
-    protected virtual void Die()
+    protected override void Die()
     {
-        // 적 사망 시 처리할 내용을 여기에 추가
-        Destroy(gameObject);
+        base.Die();
     }
 
-      void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Bullet"))
-        {
-            Bullet bullet = other.GetComponent<Bullet>();
-            if (bullet != null)
-            {
-                TakeDamage(bullet.damage);
-                Destroy(other.gameObject); // 총알 제거
-            }
-        }
-    }
+
 }
