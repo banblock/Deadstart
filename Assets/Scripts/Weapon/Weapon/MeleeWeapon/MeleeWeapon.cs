@@ -8,7 +8,7 @@ public class MeleeWeapon : Weapon
     [SerializeField]
     Collider2D hitBox;
 
-    float attackRange = 1.0f;
+    //float attackRange = 1.0f;
 
 
     protected override void PerformAttack()
