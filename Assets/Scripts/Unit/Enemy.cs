@@ -21,10 +21,12 @@ public class Enemy : Unit
         spriter = GetComponent<SpriteRenderer>();
     }
 
-    void Start()
+
+
+    protected override void SetInit()
     {
-        if (target == null)
-        {
+        base.SetInit();
+        if (target == null) {
             // 특정 대상이 설정되어 있지 않은 경우, 기본적으로 플레이어를 대상으로 설정
             target = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         }

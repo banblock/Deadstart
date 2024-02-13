@@ -4,20 +4,26 @@ public class Unit : MonoBehaviour
     public float maxHealth = 100f;
     protected float currentHealth;
 
-    public HealthBar healthBar; // HealthBar 스크립트 연결
+    [SerializeField]
+    HpBarComponent healthBar; // HealthBar 스크립트 연결
 
     void Start()
     {
+        SetInit();
+    }
+
+    protected virtual void SetInit()
+    {
         currentHealth = maxHealth;
-        healthBar.UpdateHealth(currentHealth / maxHealth);
+        healthBar.UpdateStatus(maxHealth, currentHealth);
     }
 
     public virtual void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        float healthPercentage = currentHealth / maxHealth;
-        //healthBar.UpdateHealth(healthPercentage);
+        healthBar.UpdateStatus(maxHealth, currentHealth);
 
+        Debug.Log(currentHealth);
         if (currentHealth <= 0f) {
             Die();
         }
