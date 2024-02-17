@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
-/// ÀüÃ¼ÀûÀÎ °ÔÀÓ ½Ã½ºÅÛ °ü¸®
+/// ì „ì²´ì ì¸ ê²Œì„ ì‹œìŠ¤í…œ ê´€ë¦¬
 /// </summary>
 public class GameManager : MonoBehaviour
 {
@@ -29,3 +29,4 @@ public class GameManager : MonoBehaviour
     }
 
 }
+

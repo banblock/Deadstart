@@ -9,7 +9,7 @@ public class PlayerStats
     [SerializeField] private float maxHealth;
     [SerializeField] private float speed;
 
-    // °¢ ½ºÅÈÀÇ ÃÊ±â°ª ¼³Á¤
+    // ê° ìŠ¤íƒ¯ì˜ ì´ˆê¸°ê°’ ì„¤ì •
     public float Health { 
         get { return currentHealth; } 
         set {

@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class EnemyScanner : MonoBehaviour
 {
-    public float detectionRadius = 10f; // °¨Áö ¹üÀ§ ¹İÁö¸§
-    public LayerMask enemyLayer; // Àû ·¹ÀÌ¾î
+    public float detectionRadius = 10f; // ê°ì§€ ë²”ìœ„ ë°˜ì§€ë¦„
+    public LayerMask enemyLayer; // ì  ë ˆì´ì–´
     RaycastHit2D[] targets;
 
 
@@ -15,7 +15,7 @@ public class EnemyScanner : MonoBehaviour
     public Transform GetNearestTarget()
     {
         if (targets == null || targets.Length == 0) {
-            return null; // °ËÃâµÈ ÀûÀÌ ¾øÀ¸¸é null ¹İÈ¯
+            return null; // ê²€ì¶œëœ ì ì´ ì—†ìœ¼ë©´ null ë°˜í™˜
         }
 
         Transform nearestTarget = null;
@@ -36,7 +36,7 @@ public class EnemyScanner : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        // ¿¡µğÅÍ »ó¿¡¼­ °¨Áö ¹üÀ§¸¦ ¿øÀ¸·Î ½Ã°¢ÀûÀ¸·Î Ç¥½Ã
+        // ì—ë””í„° ìƒì—ì„œ ê°ì§€ ë²”ìœ„ë¥¼ ì›ìœ¼ë¡œ ì‹œê°ì ìœ¼ë¡œ í‘œì‹œ
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }

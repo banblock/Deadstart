@@ -4,13 +4,13 @@ using System.Linq;
 using UnityEngine;
 
 /// <summary>
-/// ºĞ¿­ °¡´ÉÇÑ Åõ»çÃ¼
+/// ë¶„ì—´ ê°€ëŠ¥í•œ íˆ¬ì‚¬ì²´
 /// </summary>
 public class SplitProjectile : Projectile
 {
     [SerializeField]
-    private int splitCount = 10;  // ºĞ¿­ °³¼ö
-    private float splitSpread = 80f; // ºĞ¿­ È®»ê Á¤µµ
+    private int splitCount = 10;  // ë¶„ì—´ ê°œìˆ˜
+    private float splitSpread = 80f; // ë¶„ì—´ í™•ì‚° ì •ë„
 
     private Collider2D collidedEnemies;
   
@@ -34,7 +34,7 @@ public class SplitProjectile : Projectile
     }
 
     /// <summary>
-    /// Åõ»çÃ¼ ºĞ¿­
+    /// íˆ¬ì‚¬ì²´ ë¶„ì—´
     /// </summary>
     private void Split()
     {
@@ -51,3 +51,4 @@ public class SplitProjectile : Projectile
     }
 
 }
+

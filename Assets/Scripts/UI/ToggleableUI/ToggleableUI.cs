@@ -5,17 +5,17 @@ using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 /// <summary>
-/// ¿­°í ´Ý±â°¡ °¡´ÉÇÑ UI
+/// ì—´ê³  ë‹«ê¸°ê°€ ê°€ëŠ¥í•œ UI
 /// </summary>
 public abstract class ToggleableUI : MonoBehaviour
 {
     /// <summary>
-    /// UI¸¦ ¿±´Ï´Ù
+    /// UIë¥¼ ì—½ë‹ˆë‹¤
     /// </summary>
     public abstract void OpenUI();
 
     /// <summary>
-    /// UI¸¦ ´Ý½À´Ï´Ù
+    /// UIë¥¼ ë‹«ìŠµë‹ˆë‹¤
     /// </summary>
     public abstract void CloseUI();
 }

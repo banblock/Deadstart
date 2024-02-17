@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// π´±‚ µ•¿Ã≈Õ
+/// Î¨¥Í∏∞ Îç∞Ïù¥ÌÑ∞
 /// </summary>
 public class WeaponData 
 {
@@ -12,3 +12,4 @@ public class WeaponData
     public List<Item> requiredUpgrades;
     public List<string> nextUpgrade;
 }
+

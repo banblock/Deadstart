@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// ¹«±â ¾÷±×·¹ÀÌµå Á¤º¸
+/// ë¬´ê¸° ì—…ê·¸ë ˆì´ë“œ ì •ë³´
 /// </summary>
 [System.Serializable]
 public class WeaponUpgradeData 
@@ -29,4 +29,5 @@ public class UpgradeStpeData
     public List<string> upgradeId;
     public SelectType selectType;
 }
+
 

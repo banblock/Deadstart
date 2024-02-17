@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using static UnityEditor.ObjectChangeEventStream;
 
 /// <summary>
-/// °Ç¹° UI ½½·Ô
+/// ê±´ë¬¼ UI ìŠ¬ë¡¯
 /// </summary>
 public class BuildingSlotUI : MonoBehaviour
 {
@@ -28,7 +28,7 @@ public class BuildingSlotUI : MonoBehaviour
     }
 
     /// <summary>
-    /// °Ç¹° ½½·Ô UI Á¤º¸¸¦ °»½Å
+    /// ê±´ë¬¼ ìŠ¬ë¡¯ UI ì •ë³´ë¥¼ ê°±ì‹ 
     /// </summary>
     /// <param name="bulidingData"></param>
     public void InitSlot(BuildingData bulidingData)
@@ -41,10 +41,11 @@ public class BuildingSlotUI : MonoBehaviour
     }
 
     /// <summary>
-    /// ÇöÀç °Ç¹° ½½·ÔÀº ¼±ÅÃÇÕ´Ï´Ù
+    /// í˜„ì¬ ê±´ë¬¼ ìŠ¬ë¡¯ì€ ì„ íƒí•©ë‹ˆë‹¤
     /// </summary>
     public void SelectBuilding()
     {
         BuilderUI.ChangeBuildMode();
     }
 }
+

@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 /// <summary>
-/// ½ºÅ©¸³ÅÍºí ¿ÀºêÁ§Æ®¸¦ µî·ÏÇÏ°í ¹İÈ¯ÇÕ´Ï´Ù.
+/// ìŠ¤í¬ë¦½í„°ë¸” ì˜¤ë¸Œì íŠ¸ë¥¼ ë“±ë¡í•˜ê³  ë°˜í™˜í•©ë‹ˆë‹¤.
 /// </summary>
 public class ScriptableObjectsManager : MonoBehaviour
 {
@@ -21,3 +21,4 @@ public class ScriptableObjectsManager : MonoBehaviour
     }
 
 }
+

@@ -9,3 +9,4 @@ public class WeaponUpgradeList : ScriptableObject
     public List<WeaponUpgradeData> upgradeDatas;
     
 }
+

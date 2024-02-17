@@ -22,12 +22,12 @@ public class ProjectilePoolManager : MonoBehaviour
     }
     
     /// <summary>
-    /// ¹ß»çÃ¼¸¦ Pool¿¡¼­ °¡Á®¿É´Ï´Ù.
+    /// ë°œì‚¬ì²´ë¥¼ Poolì—ì„œ ê°€ì ¸ì˜µë‹ˆë‹¤.
     /// </summary>
-    /// <param name="prefab">¹ß»çÃ¼ ÇÁ¸®Æé</param>
-    /// <param name="position">À§Ä¡</param>
-    /// <param name="rotation">È¸ÀüÀ²</param>
-    /// <returns> ¹ß»çÃ¼ ¿ÀºêÁ§Æ® </returns>
+    /// <param name="prefab">ë°œì‚¬ì²´ í”„ë¦¬í©</param>
+    /// <param name="position">ìœ„ì¹˜</param>
+    /// <param name="rotation">íšŒì „ìœ¨</param>
+    /// <returns> ë°œì‚¬ì²´ ì˜¤ë¸Œì íŠ¸ </returns>
     public GameObject GetProjectileFromPool(GameObject prefab, Vector3 position, Quaternion rotation)
     {
         Type projectileComponentType = prefab.GetComponent<Projectile>()?.GetType();
@@ -56,7 +56,7 @@ public class ProjectilePoolManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ¹ß»çÃ¼ ¿ÀºêÁ§Æ®¸¦ Pool¿¡ ¹İÈ¯ ÇÕ´Ï´Ù.
+    /// ë°œì‚¬ì²´ ì˜¤ë¸Œì íŠ¸ë¥¼ Poolì— ë°˜í™˜ í•©ë‹ˆë‹¤.
     /// </summary>
     /// <param name="projectile"></param>
     public void ReturnProjectileToPool(GameObject projectile)
@@ -67,7 +67,7 @@ public class ProjectilePoolManager : MonoBehaviour
 
 
     /// <summary>
-    /// private ¸Ş¼­µå
+    /// private ë©”ì„œë“œ
     private List<GameObject> GetOrCreateProjectilePool(int poolNumber)
     {
         if (poolNumber >= projectilePool.Count) {
@@ -92,3 +92,4 @@ public class ProjectilePoolManager : MonoBehaviour
         projectile.SetActive(true);
     }
 }
+

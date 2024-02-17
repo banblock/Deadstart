@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// ÇÃ·¹ÀÌ¾î ÄÁÆ®·Ñ·¯
+/// í”Œë ˆì´ì–´ ì»¨íŠ¸ë¡¤ëŸ¬
 /// </summary>
 public class PlayerController : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rigid;
 
     [SerializeField]
-    private PlayerStats playerStats;  // ÇÃ·¹ÀÌ¾î ½ºÅÈ °ü¸® Å¬·¡½º
+    private PlayerStats playerStats;  // í”Œë ˆì´ì–´ ìŠ¤íƒ¯ ê´€ë¦¬ í´ë˜ìŠ¤
 
     private Vector2 inputVector;
 
@@ -31,16 +31,16 @@ public class PlayerController : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
 
-        //weponManagerÁöÁ¤
+        //weponManagerì§€ì •
         if( weaponManager == null ) {
             weaponManager = WeaponManager.Instance;
         }
 
-        // ÇÃ·¹ÀÌ¾î ½ºÅÈ ÃÊ±âÈ­
+        // í”Œë ˆì´ì–´ ìŠ¤íƒ¯ ì´ˆê¸°í™”
         playerStats = new PlayerStats();
         playerStats.InitializeStats();
 
-        // ½ºÅÈ ¾÷µ¥ÀÌÆ®
+        // ìŠ¤íƒ¯ ì—…ë°ì´íŠ¸
         UpdatePlayerStats();
 
        
@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î ÀÌµ¿ ÀÔ·Â
+    /// í”Œë ˆì´ì–´ ì´ë™ ì…ë ¥
     /// </summary>
     private void InputPlayerMove()
     {
@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î ÀÌµ¿
+    /// í”Œë ˆì´ì–´ ì´ë™
     /// </summary>
     private void MovePlayer()
     {
@@ -79,25 +79,25 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î µ¥¹ÌÁö¸¦ ¹Ş´Â´Ù
+    /// í”Œë ˆì´ì–´ ë°ë¯¸ì§€ë¥¼ ë°›ëŠ”ë‹¤
     /// </summary>
-    /// <param name="damage">ÇÃ·¹ÀÌ¾î°¡ ¹Ş´Â µ¥¹ÌÁö</param>
+    /// <param name="damage">í”Œë ˆì´ì–´ê°€ ë°›ëŠ” ë°ë¯¸ì§€</param>
     public void TakeDamage(int damage)
     {
         playerStats.Health -= damage;
 
         if (playerStats.Health > 0) {
-            // todo : ÇÃ·¹ÀÌ¾î ÇÇ°İ
+            // todo : í”Œë ˆì´ì–´ í”¼ê²©
             
         }
         else {
-            // todo : ÇÃ·¹ÀÌ¾î »ç¸Á
+            // todo : í”Œë ˆì´ì–´ ì‚¬ë§
             Die();
         }
     }
 
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î »ç¸Á
+    /// í”Œë ˆì´ì–´ ì‚¬ë§
     /// </summary>
     private void Die()
     {
@@ -107,10 +107,11 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// ½ºÅÈ ¾÷µ¥ÀÌÆ® ¹× UI ÅØ½ºÆ® °»½Å
+    /// ìŠ¤íƒ¯ ì—…ë°ì´íŠ¸ ë° UI í…ìŠ¤íŠ¸ ê°±ì‹ 
     /// </summary>
     private void UpdatePlayerStats()
     {
         Debug.Log($"Player Stats: HP - {playerStats.Health}, ATK - {playerStats.Attack}, ATK Speed - {playerStats.AttackSpeed}, Speed - {playerStats.Speed}");
     }
 }
+

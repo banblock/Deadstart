@@ -8,7 +8,7 @@ public class ExplosiveProjectile : Projectile
     GameObject explosionPrefab;
 
     /// <summary>
-    /// Åõ»çÃ¼ »èÁ¦ : pool ¹ÝÈ¯
+    /// íˆ¬ì‚¬ì²´ ì‚­ì œ : pool ë°˜í™˜
     /// </summary>
     protected override void DestroyBullet()
     {
@@ -17,3 +17,4 @@ public class ExplosiveProjectile : Projectile
     }
 
 }
+

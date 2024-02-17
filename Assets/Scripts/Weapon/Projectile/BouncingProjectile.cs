@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ¹İ»ç °¡´ÉÇÑ Åõ»çÃ¼
+/// ë°˜ì‚¬ ê°€ëŠ¥í•œ íˆ¬ì‚¬ì²´
 /// </summary>
 public class BouncingProjectile : Projectile
 {
 
     [SerializeField]
-    private float bounceSpread = 80f; // ¹İ»ç È®»ê Á¤µµ
+    private float bounceSpread = 80f; // ë°˜ì‚¬ í™•ì‚° ì •ë„
     private Collider2D collidedEnemies;
     [SerializeField]
-    private int maxBounceCount = 3; // ÃÖ´ë Æ¨±â´Â Á¤µµ
+    private int maxBounceCount = 3; // ìµœëŒ€ íŠ•ê¸°ëŠ” ì •ë„
     private int currentBounceCount;
 
     protected override void SetInit()
@@ -54,3 +54,4 @@ public class BouncingProjectile : Projectile
         newSplitProjectile.currentBounceCount = currentBounceCount - 1;
     }
 }
+
