@@ -22,11 +22,14 @@ public class SplitProjectile : Projectile
 
     protected override void HitEnemy(Collider2D enemyCollider)
     {
-        //enemy.TakeDamage(projectileDamage);
-        if (collidedEnemies != enemyCollider) {
-            collidedEnemies = enemyCollider;
-            Split();
-            DestroyBullet();
+        Enemy enemy = enemyCollider.GetComponent<Enemy>();
+        if(enemy != null) {
+            enemy.TakeDamage(projectileDamage);
+            if (collidedEnemies != enemyCollider) {
+                collidedEnemies = enemyCollider;
+                Split();
+                DestroyBullet();
+            }
         }
     }
 
