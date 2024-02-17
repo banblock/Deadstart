@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// ÀÚ¿ø Ç¥±â UI
+/// ìì›ì–‘ í‘œê¸° UI
 /// </summary>
 public class ResourceInfoUIComponent : MonoBehaviour
 {

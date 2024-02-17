@@ -14,15 +14,15 @@ public class MeleeWeapon : Weapon
     protected override void PerformAttack()
     {
         
-        // °ø°İ ½ÃÇà½Ã È÷Æ® ¹Ú½º On
+        // ê³µê²© ì‹œí–‰ì‹œ íˆíŠ¸ ë°•ìŠ¤ On
 
-        // °ø°İÇÏ´Â ¾Ö´Ï¸ŞÀÌ¼Ç Ãâ·Â
+        // ê³µê²©í•˜ëŠ” ì• ë‹ˆë©”ì´ì…˜ ì¶œë ¥
 
 
     }
 
     /// <summary>
-    /// È÷Æ®¹Ú½º È°¼ºÈ­
+    /// íˆíŠ¸ë°•ìŠ¤ í™œì„±í™”
     /// </summary>
     private void ActiveHitBox()
     {
@@ -31,11 +31,10 @@ public class MeleeWeapon : Weapon
         }
     }
 
-
     /// <summary>
-    /// È÷Æ®¹Ú½º ¼³Á¤ - ÀÓ½Ã
+    /// íˆíŠ¸ë°•ìŠ¤ ì„¤ì • - ì„ì‹œ
     /// </summary>
-    /// <param name="size">Å©±â</param>
+    /// <param name="size">í¬ê¸°</param>
     private void SetHitBoxSize(float size)
     {
         float colliderSize = size * 2f + 1f;

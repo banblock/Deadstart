@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ¾ÆÀÌÅÛ
+/// ì•„ì´í…œ
 /// </summary>
 [System.Serializable]
 public class Item 
@@ -12,3 +12,4 @@ public class Item
     public string Name;
     public int amount;
 }
+

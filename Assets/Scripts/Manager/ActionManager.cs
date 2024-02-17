@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Çàµ¿ ¸ğµå
+/// í–‰ë™ ëª¨ë“œ
 /// </summary>
 public enum ActionMode
 {
@@ -14,7 +14,7 @@ public enum ActionMode
 }
 
 /// <summary>
-/// Çàµ¿ °ü¸®ÀÚ
+/// í–‰ë™ ê´€ë¦¬ì
 /// </summary>
 public class ActionManager : MonoBehaviour
 {
@@ -49,14 +49,15 @@ public class ActionManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ÇöÁ¦ Çàµ¿ ¸ğµå¸¦ º¯°æÇÕ´Ï´Ù.
+    /// í˜„ì œ í–‰ë™ ëª¨ë“œë¥¼ ë³€ê²½í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <param name="newMode"> º¯°æÇÒ Çàµ¿ ¸ğµå </param>
+    /// <param name="newMode"> ë³€ê²½í•  í–‰ë™ ëª¨ë“œ </param>
     public void ChangeActionMode(ActionMode newMode)
     {
         if (newMode != ActionMode) {
             ActionMode = newMode;
-            OnActionModeChanged?.Invoke(ActionMode); // Çàµ¿ ¸ğµå º¯°æ¿¡ µî·ÏµÈ ÀÌº¥Æ®¸¦ È£Ãâ
+            OnActionModeChanged?.Invoke(ActionMode); // í–‰ë™ ëª¨ë“œ ë³€ê²½ì— ë“±ë¡ëœ ì´ë²¤íŠ¸ë¥¼ í˜¸ì¶œ
         }
     }
 }
+

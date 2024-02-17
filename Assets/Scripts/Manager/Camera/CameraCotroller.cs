@@ -1,11 +1,11 @@
 using UnityEngine;
 
 /// <summary>
-/// Ä«¸Ş¶ó ÄÁÆ®·Ñ·¯
+/// ì¹´ë©”ë¼ ì»¨íŠ¸ë¡¤ëŸ¬
 /// </summary>
 public class CameraController : MonoBehaviour
 {
-    public Transform target; // ÇÃ·¹ÀÌ¾îÀÇ TransformÀ» ¿¬°á
+    public Transform target; // í”Œë ˆì´ì–´ì˜ Transformì„ ì—°ê²°
 
     public float smoothSpeed = 0.125f;
     public Vector3 offset;
@@ -27,3 +27,4 @@ public class CameraController : MonoBehaviour
         }
     }
 }
+

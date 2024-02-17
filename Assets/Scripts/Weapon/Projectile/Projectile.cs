@@ -104,10 +104,9 @@ public class Projectile : MonoBehaviour
     }
 
     /// <summary>
-
-    /// �ǹ��� �浹
+    /// 벽과 충돌한 경우
     /// </summary>
-    /// <param name="enemy"> �浹�� �ǹ� </param>
+    /// <param name="enemy"> 충돌한 벽 </param>
     protected virtual void HitBuilding(Collider2D enemy)
     {
         DestroyBullet();

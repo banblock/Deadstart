@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ¿ÀºêÁ§Æ® poolÀ» °ü¸®ÇÕ´Ï´Ù
+/// ì˜¤ë¸Œì íŠ¸ poolì„ ê´€ë¦¬í•©ë‹ˆë‹¤
 /// </summary>
 public class PoolManager : MonoBehaviour
 {
@@ -34,7 +34,7 @@ public class PoolManager : MonoBehaviour
             }
         }
 
-        // Ç®¿¡ ºñÈ°¼ºÈ­µÈ Åõ»çÃ¼°¡ ¾øÀ¸¸é »õ·Î¿î Åõ»çÃ¼ »ı¼º
+        // í’€ì— ë¹„í™œì„±í™”ëœ íˆ¬ì‚¬ì²´ê°€ ì—†ìœ¼ë©´ ìƒˆë¡œìš´ íˆ¬ì‚¬ì²´ ìƒì„±
         GameObject newObj = Instantiate(gameObject, position, rotation, transform);
         objPool.Add(newObj);
         return newObj;
@@ -45,3 +45,4 @@ public class PoolManager : MonoBehaviour
         obj.SetActive(false);
     }
 }
+
