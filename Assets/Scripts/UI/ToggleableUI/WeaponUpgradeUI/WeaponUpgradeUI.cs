@@ -13,15 +13,19 @@ public class WeaponUpgradeUI : ToggleableUI
     [SerializeField]
     private Transform weaponUpgradeButtonPos;
 
+
     private WeaponManager weaponManager;
-    private List<WeaponUpgradeData> weaponUpgradeDatas; //¹«±â ¾÷±×·¹ÀÌµå Á¤º¸¸¦ °¡Á®¿È
+    private List<WeaponUpgradeData> weaponUpgradeDatas; //ë¬´ê¸° ì—…ê·¸ë ˆì´ë“œ ì •ë³´ë¥¼ ê°€ì ¸ì˜´
 
-    private List<string> upgradeWeapons; // ¾÷±×·¹ÀÌµå°¡ ¿Ï·áµÈ Á¤º¸
-    //¸Å¹ø ¾÷±×·¹ÀÌµå Á¤º¸¸¦ °»½ÅÇÏ±â º¸´Ù´Â °»½ÅÇÏ°í ÃÖ¼ÒÈ¯À¸·Î °»½ÅÇÏ´Â °ÍÀÌ º£½ºÆ®
+    private List<string> upgradeWeapons; // ì—…ê·¸ë ˆì´ë“œê°€ ì™„ë£Œëœ ì •ë³´
+                                         //ë§¤ë²ˆ ì—…ê·¸ë ˆì´ë“œ ì •ë³´ë¥¼ ê°±ì‹ í•˜ê¸° ë³´ë‹¤ëŠ” ê°±ì‹ í•˜ê³  ìµœì†Œí™˜ìœ¼ë¡œ ê°±ì‹ í•˜ëŠ” ê²ƒì´ ë² ìŠ¤íŠ¸
 
+    [SerializeField]
+    WeaponUpgradeListUI[] weaponUpgradeListUI;
+    int weaponUpgradeIndex;
+    bool weaponSelected = false;
 
-
-    private void Awake()
+    void Awake()
     {
         if(Instance == null) {
             Instance = this;
@@ -40,8 +44,12 @@ public class WeaponUpgradeUI : ToggleableUI
 
     public override void OpenUI()
     {
+        
         gameObject.SetActive(true);
         DisplayWeaponUpgradeList();
+        if (weaponSelected) {
+            SelectWeaponType(weaponUpgradeIndex);
+        }
     }
 
     public override void CloseUI()
@@ -49,12 +57,18 @@ public class WeaponUpgradeUI : ToggleableUI
         gameObject.SetActive(false);
     }
 
+    public void SelectWeaponType(int type)
+    {
+        weaponUpgradeListUI[type].gameObject.SetActive(true);
+        weaponUpgradeIndex = type;
+    }
+
     void UpdateUpgradeButton()
     {
-        // ÀÏ´Ü ½ÃÀÛ ºÎºĞºÎÅÍ È°¼ºÈ­
-        // ´ÙÀ½ ¾÷±×·¹ÀÌµå Å½»ö
+        // ì¼ë‹¨ ì‹œì‘ ë¶€ë¶„ë¶€í„° í™œì„±í™”
+        // ë‹¤ìŒ ì—…ê·¸ë ˆì´ë“œ íƒìƒ‰
         // 
-        // ´ÙÀ½ ¾÷±×·¹ÀÌµå·Î ÀÌµ¿
+        // ë‹¤ìŒ ì—…ê·¸ë ˆì´ë“œë¡œ ì´ë™
         // 
 
     }
@@ -62,12 +76,12 @@ public class WeaponUpgradeUI : ToggleableUI
 
 
     /// <summary>
-    /// ¹«±â ¾÷±×·¡ÀÌµå Á¤º¸¸¦ Ãâ·ÂÇÕ´Ï´Ù
+    /// ë¬´ê¸° ì—…ê·¸ë˜ì´ë“œ ì •ë³´ë¥¼ ì¶œë ¥í•©ë‹ˆë‹¤
     /// </summary>
     void DisplayWeaponUpgradeList()
     {
         if(weaponUpgradeDatas == null) {
-            Debug.LogError("¹«±â ¸®½ºÆ®°¡ ¾ø½À´Ï´Ù.");
+            Debug.LogError("ë¬´ê¸° ë¦¬ìŠ¤íŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤.");
             return;
         }
         

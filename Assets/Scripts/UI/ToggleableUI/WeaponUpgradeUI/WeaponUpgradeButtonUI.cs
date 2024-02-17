@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// ¹«±â ¾÷±×·¹ÀÌµå ¹öÆ°
+/// ë¬´ê¸° ì—…ê·¸ë ˆì´ë“œ ë²„íŠ¼
 /// </summary>
 public class WeaponUpgradeButtonUI : MonoBehaviour
 {
@@ -21,9 +21,9 @@ public class WeaponUpgradeButtonUI : MonoBehaviour
     WeaponUpgradeData weaponUpgradeData;
 
     /// <summary>
-    /// ¹«±â ¾÷±×·¹ÀÌµå ¹öÆ°À» °»½ÅÇÕ´Ï´Ù
+    /// ë¬´ê¸° ì—…ê·¸ë ˆì´ë“œ ë²„íŠ¼ì„ ê°±ì‹ í•©ë‹ˆë‹¤
     /// </summary>
-    /// <param name="weaponData">¹«±â ¾÷±×·¹ÀÌµå Á¤º¸</param>
+    /// <param name="weaponData">ë¬´ê¸° ì—…ê·¸ë ˆì´ë“œ ì •ë³´</param>
     public void SetInitUI(WeaponUpgradeData weaponData)
     {
         weaponUpgradeData = weaponData;
@@ -33,12 +33,13 @@ public class WeaponUpgradeButtonUI : MonoBehaviour
     }
 
     /// <summary>
-    /// ÇöÀç¹«±â·Î º¯°æÇÕ´Ï´Ù
+    /// í˜„ì¬ë¬´ê¸°ë¡œ ë³€ê²½í•©ë‹ˆë‹¤
     /// </summary>
     public void OnUpgradeButtonClick()
     {
         WeaponManager.Instance.ChangeWeapon(weaponUpgradeData.name);
     }
+
 
 }
 
