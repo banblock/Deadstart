@@ -7,12 +7,22 @@ public class WeaponUpgradeUI : ToggleableUI
     public static WeaponUpgradeUI Instance { get; private set; }
 
     [SerializeField]
+    private GameObject SelectedWeaponUI; // 무기 종류 UI
+    [SerializeField]
+    WeaponUpgradeListUI[] weaponUpgradeListUI; // 업그리에드 리스트
+    int weaponUpgradeIndex;
+    bool weaponSelected = false;
+
+    // 밑에는 다 버려
+
+    /*
+    [SerializeField]
     private GameObject weaponUpgradeButtonPrefab;
     private List<GameObject> weaponUpgradeButtonList = new List<GameObject>();
 
     [SerializeField]
     private Transform weaponUpgradeButtonPos;
-
+    */
 
     private WeaponManager weaponManager;
     private List<WeaponUpgradeData> weaponUpgradeDatas; //무기 업그레이드 정보를 가져옴
@@ -20,10 +30,7 @@ public class WeaponUpgradeUI : ToggleableUI
     private List<string> upgradeWeapons; // 업그레이드가 완료된 정보
                                          //매번 업그레이드 정보를 갱신하기 보다는 갱신하고 최소환으로 갱신하는 것이 베스트
 
-    [SerializeField]
-    WeaponUpgradeListUI[] weaponUpgradeListUI;
-    int weaponUpgradeIndex;
-    bool weaponSelected = false;
+    
 
     void Awake()
     {
@@ -44,9 +51,8 @@ public class WeaponUpgradeUI : ToggleableUI
 
     public override void OpenUI()
     {
-        
         gameObject.SetActive(true);
-        DisplayWeaponUpgradeList();
+        //DisplayWeaponUpgradeList();
         if (weaponSelected) {
             SelectWeaponType(weaponUpgradeIndex);
         }
@@ -61,6 +67,7 @@ public class WeaponUpgradeUI : ToggleableUI
     {
         weaponUpgradeListUI[type].gameObject.SetActive(true);
         weaponUpgradeIndex = type;
+        SelectedWeaponUI.SetActive(false);
     }
 
     void UpdateUpgradeButton()
@@ -73,8 +80,6 @@ public class WeaponUpgradeUI : ToggleableUI
 
     }
 
-
-
     /// <summary>
     /// 무기 업그래이드 정보를 출력합니다
     /// </summary>
@@ -84,7 +89,7 @@ public class WeaponUpgradeUI : ToggleableUI
             Debug.LogError("무기 리스트가 없습니다.");
             return;
         }
-        
+        /*
         foreach (WeaponUpgradeData upgradeData in weaponUpgradeDatas)
         {
             GameObject buttonUI = Instantiate(weaponUpgradeButtonPrefab, weaponUpgradeButtonPos);
@@ -92,8 +97,7 @@ public class WeaponUpgradeUI : ToggleableUI
             upgradeButtonUI.SetInitUI(upgradeData);
             weaponUpgradeButtonList.Add(buttonUI);
         }
+        */
     }
-
-
 
 }

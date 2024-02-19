@@ -3,26 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ¹«±â ÀåÂø ¹× ¾÷±×·¹ÀÌµå °ü¸®
+/// ë¬´ê¸° ì¥ì°© ë° ì—…ê·¸ë ˆì´ë“œ ê´€ë¦¬
 /// </summary>
 public class WeaponManager : MonoBehaviour
 {
     public static WeaponManager Instance { private set; get; }
 
-    public GameObject initialWeaponPrefab; //±âº»¹«±â
-    private GameObject currentWeapon; //ÇöÀç¹«±â
+    public GameObject initialWeaponPrefab; //ê¸°ë³¸ë¬´ê¸°
+    private GameObject currentWeapon; //í˜„ì¬ë¬´ê¸°
 
     [SerializeField]
-    Transform weaponPosition; //¹«±â ÀåÂø À§Ä¡
+    Transform weaponPosition; //ë¬´ê¸° ì¥ì°© ìœ„ì¹˜
 
     [SerializeField]
-    WeaponUpgradeList upgradeOptions; //¾÷±×·¹ÀÌµå °¡´É ¿É¼Ç
+    WeaponUpgradeList upgradeOptions; //ì—…ê·¸ë ˆì´ë“œ ê°€ëŠ¥ ì˜µì…˜
 
-    //ÇöÁ¦ ¾÷±×·¹ÀÌµåµÈ ¹«±â Á¤º¸ ÀúÀå
+    //í˜„ì œ ì—…ê·¸ë ˆì´ë“œëœ ë¬´ê¸° ì •ë³´ ì €ì¥
     List<string> weaponUpgrade = new List<string>();
 
     WeaponUpgrageManager WeaponUpgrageManager;
 
+    Dictionary<string, WeaponData> weaponUpgradeStatus = new Dictionary<string, WeaponData>();
 
 
     private void Awake()
@@ -38,10 +39,10 @@ public class WeaponManager : MonoBehaviour
     void Start()
     {
         if(weaponPosition == null ) {
-            //¹«±â ÀåÂø À§Ä¡¸¦ ÇÃ·¹ÀÌ¾î·Î ¼³Á¤
+            //ë¬´ê¸° ì¥ì°© ìœ„ì¹˜ë¥¼ í”Œë ˆì´ì–´ë¡œ ì„¤ì •
             weaponPosition = PlayerController.Instance.transform;
         }
-        //±âº»¹«±â ÀåÂø
+        //ê¸°ë³¸ë¬´ê¸° ì¥ì°©
         EquipWeapon(initialWeaponPrefab);
     }
 
@@ -71,9 +72,9 @@ public class WeaponManager : MonoBehaviour
 
 
     /// <summary>
-    /// ¹«±â º¯°æ¸¦ º¯°æÇÕ´Ï´Ù
+    /// ë¬´ê¸° ë³€ê²½ë¥¼ ë³€ê²½í•©ë‹ˆë‹¤
     /// </summary>
-    /// <param name="upgradeName"> ¹«±â ÀÌ¸§ </param>
+    /// <param name="upgradeName"> ë¬´ê¸° ì´ë¦„ </param>
     public void ChangeWeapon(string upgradeName)
     {
         WeaponUpgradeData upgradeInfo = GetWeaponData(upgradeName);
@@ -84,10 +85,10 @@ public class WeaponManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ¹«±â ¾÷±×·¹ÀÌµå ¸®½ºÆ®¿¡¼­ ÇØ´çÇÏ´Â ¹øÈ£ÀÇ ¹«±â ¾÷±×·¹ÀÌµå Á¤º¸¸¦ °¡Á®¿É´Ï´Ù
+    /// ë¬´ê¸° ì—…ê·¸ë ˆì´ë“œ ë¦¬ìŠ¤íŠ¸ì—ì„œ í•´ë‹¹í•˜ëŠ” ë²ˆí˜¸ì˜ ë¬´ê¸° ì—…ê·¸ë ˆì´ë“œ ì •ë³´ë¥¼ ê°€ì ¸ì˜µë‹ˆë‹¤
     /// </summary>
-    /// <param name="upgradeName"> ¹«±â ÀÌ¸§ </param>
-    /// <returns> ¹«±â Á¤º¸ </returns>
+    /// <param name="upgradeName"> ë¬´ê¸° ì´ë¦„ </param>
+    /// <returns> ë¬´ê¸° ì •ë³´ </returns>
     public WeaponUpgradeData GetWeaponData(string upgradeName)
     {
         WeaponUpgradeData upgradeData = upgradeOptions.upgradeDatas.Find(info => info.name == upgradeName);
@@ -96,15 +97,15 @@ public class WeaponManager : MonoBehaviour
             return upgradeData;
         }
         else {
-            Debug.LogError("ÇØ´ç ¾÷±×·¹ÀÌµå Á¤º¸¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+            Debug.LogError("í•´ë‹¹ ì—…ê·¸ë ˆì´ë“œ ì •ë³´ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
             return null;
         }
     }
 
     /// <summary>
-    /// ¹«±â ÀåÂø
+    /// ë¬´ê¸° ì¥ì°©
     /// </summary>
-    /// <param name="weaponPrefab"> ÀåÂøÇÒ ¹«±â </param>
+    /// <param name="weaponPrefab"> ì¥ì°©í•  ë¬´ê¸° </param>
     private void EquipWeapon(GameObject weaponPrefab)
     {
         if (currentWeapon != null) {
@@ -118,9 +119,9 @@ public class WeaponManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ¹«±â ¸®½ºÆ®¸¦ °¡Á®¿É´Ï´Ù
+    /// ë¬´ê¸° ë¦¬ìŠ¤íŠ¸ë¥¼ ê°€ì ¸ì˜µë‹ˆë‹¤
     /// </summary>
-    /// <returns> ¹«±â ¸®½ºÆ® </returns>
+    /// <returns> ë¬´ê¸° ë¦¬ìŠ¤íŠ¸ </returns>
     public List<WeaponUpgradeData> GetWeaponDataList()
     {
         return upgradeOptions.upgradeDatas;
@@ -130,9 +131,9 @@ public class WeaponManager : MonoBehaviour
 
 public class WeaponUpgrageManager
 {
-    // ÀÌ¹Ì ¾÷±×·¹ÀÌµå µÈ Á¤º¸µé...
+    // ì´ë¯¸ ì—…ê·¸ë ˆì´ë“œ ëœ ì •ë³´ë“¤...
     WeaponUpgradeList upgradeOptions;
-    // ÀüÃ¼ ¾÷±×·¹ÀÌµå Á¤º¸
+    // ì „ì²´ ì—…ê·¸ë ˆì´ë“œ ì •ë³´
     Dictionary<string, WeaponUpgradeData> upgradeDictionary;
 
     public WeaponUpgradeData GetUpgradeData(string id)
