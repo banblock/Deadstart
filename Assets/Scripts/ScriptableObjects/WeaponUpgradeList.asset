@@ -41,8 +41,11 @@ MonoBehaviour:
       Name: 1
       amount: 10
     nextUpgrade:
-      upgradeId: []
-      selectType: 0
+      upgradeId:
+      - 01-03-1
+      - 01-03-2
+      - 01-03-3
+      selectType: 1
     previousUpgrade:
       upgradeId: []
       selectType: 0

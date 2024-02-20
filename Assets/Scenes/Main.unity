@@ -13863,6 +13863,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialWeaponPrefab: {fileID: 4216221775241072926, guid: b0c95474d7bb4d24b8b45c8d97c070d2, type: 3}
+  initialWeaponId: 01-01
   weaponPosition: {fileID: 0}
   upgradeOptions: {fileID: 11400000, guid: 93d56dc27248d96469f221dfca01d459, type: 2}
 --- !u!1 &1160725301

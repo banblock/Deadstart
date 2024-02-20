@@ -1,41 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class WeaponUpgradeListUI : MonoBehaviour
 {
-    private List<GameObject> weaponUpgradeObjects = new List<GameObject>();
-
-    private WeaponManager weaponManager;
-    private List<WeaponUpgradeData> weaponUpgradeDatas; //무기 업그레이드 정보를 가져옴
+    private List<WeaponUpgradeButtonUI> weaponUpgradeObjects = new List<WeaponUpgradeButtonUI>();
 
     void Start()
     {
-        weaponManager = WeaponManager.Instance;
-        weaponUpgradeDatas = weaponManager.GetWeaponDataList();
         CollectWeaponUpgradeObjects();
+        UpdateWeaponUpgradeButton();
     }
 
     void CollectWeaponUpgradeObjects()
     {
         ScrollRect scrollRect = GetComponent<ScrollRect>();
-        RectTransform content = scrollRect.content;
-        Transform[] children = content.transform.GetComponentsInChildren<Transform>(true);
+        Transform targetObj = scrollRect.content.transform;
 
-        foreach (Transform child in children) {
-            WeaponUpgradeButtonUI weaponUpgradeButton = child.GetComponent<WeaponUpgradeButtonUI>();
-            if (weaponUpgradeButton != null) {
-                WeaponUpgradeData foundUpgradeData = weaponUpgradeDatas.Find(data => data.name == weaponUpgradeButton.WeaponId);
-                
-                if(foundUpgradeData == null) continue;
-                
-                weaponUpgradeButton.SetInitUI(foundUpgradeData);
-                weaponUpgradeObjects.Add(child.gameObject);
+        // targetObj의 자식 오브젝트를 순회하며 WeaponUpgradeButtonUI 컴포넌트를 포함한 오브젝트를 찾음
+        foreach (Transform child in targetObj) {
+            if (child.TryGetComponent<WeaponUpgradeButtonUI>(out var weaponUpgradeButtonUI)) {
+                weaponUpgradeObjects.Add(weaponUpgradeButtonUI);
             }
         }
 
         Debug.Log("Collected " + weaponUpgradeObjects.Count + " objects with WeaponUpgradeButtonUI script.");
+    }
+
+    public void UpdateWeaponUpgradeButton()
+    {
+        Dictionary<string, WeaponUpgradeData> weaponUpgradeList = WeaponManager.Instance.GetWeaponDatas(); // 무기 업그레이드 정보
+        Dictionary<string, UpgradeStatus> weaponUpgradeStatus = WeaponManager.Instance.GetWeaponUpgradeStatus(); //무기 업그레이드 상태
+
+        foreach (WeaponUpgradeButtonUI uiButton in weaponUpgradeObjects)
+        {    
+            string weaponId = uiButton.WeaponId;
+            WeaponUpgradeData weaponUpgradeData = weaponUpgradeList[weaponId];
+            UpgradeStatus upgradeStatus = weaponUpgradeStatus[weaponId];
+
+            uiButton.SetInitUI(weaponUpgradeData);
+            uiButton.SetUpgradeStatus(upgradeStatus);
+        }
     }
 }

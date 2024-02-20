@@ -3,28 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
+/// 업그레이드 상태
+/// </summary>
+public enum UpgradeStatus
+{
+    NotAvailable, // 업그레이드 불가
+    Available,    // 업그레이드 가능
+    Completed     // 업그레이드 완료
+}
+
+/// <summary>
 /// 무기 장착 및 업그레이드 관리
 /// </summary>
 public class WeaponManager : MonoBehaviour
 {
     public static WeaponManager Instance { private set; get; }
 
+    
+
+    [HideInInspector]
     public GameObject initialWeaponPrefab; //기본무기
+
+    [SerializeField, HideInInspector]
     private GameObject currentWeapon; //현재무기
 
-    [SerializeField]
+
+    [SerializeField, HideInInspector]
     Transform weaponPosition; //무기 장착 위치
 
     [SerializeField]
-    WeaponUpgradeList upgradeOptions; //업그레이드 가능 옵션
+    WeaponUpgradeList upgradeOptions; //업그레이드 옵션
 
-    //현제 업그레이드된 무기 정보 저장
-    List<string> weaponUpgrade = new List<string>();
+    [SerializeField]
+    string initialWeaponId;
 
-    WeaponUpgrageManager WeaponUpgrageManager;
-
-    Dictionary<string, WeaponData> weaponUpgradeStatus = new Dictionary<string, WeaponData>();
-
+    // 무기 업그레이드 정보
+    Dictionary<string, WeaponUpgradeData> weaponUpgradeList = new Dictionary<string, WeaponUpgradeData>();
+    
+    //무기 업그레이드 상태
+    Dictionary<string, UpgradeStatus> weaponUpgradeStatus = new Dictionary<string, UpgradeStatus>();
 
     private void Awake()
     {
@@ -34,6 +51,7 @@ public class WeaponManager : MonoBehaviour
         else {
             Destroy(this);
         }
+        initSetUpgradeStatus();
     }
 
     void Start()
@@ -43,7 +61,7 @@ public class WeaponManager : MonoBehaviour
             weaponPosition = PlayerController.Instance.transform;
         }
         //기본무기 장착
-        EquipWeapon(initialWeaponPrefab);
+        ChangeWeapon(initialWeaponId);
     }
 
     void Update()
@@ -65,19 +83,25 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-    public void UpgradeWeapon()
+    /// <summary>
+    /// 초기 업그레이드 정보를 설정합니다.
+    /// </summary>
+    void initSetUpgradeStatus()
     {
-        
+        foreach (var upgradeData in upgradeOptions.upgradeDatas) {
+            weaponUpgradeList.Add(upgradeData.name, upgradeData);
+            weaponUpgradeStatus.Add(upgradeData.name, UpgradeStatus.NotAvailable);
+        }
+        weaponUpgradeStatus[initialWeaponId] = UpgradeStatus.Available;
     }
-
 
     /// <summary>
     /// 무기 변경를 변경합니다
     /// </summary>
-    /// <param name="upgradeName"> 무기 이름 </param>
-    public void ChangeWeapon(string upgradeName)
+    /// <param name="upgradeId"> 무기 이름 </param>
+    public void ChangeWeapon(string upgradeId)
     {
-        WeaponUpgradeData upgradeInfo = GetWeaponData(upgradeName);
+        WeaponUpgradeData upgradeInfo = GetWeaponData(upgradeId);
 
         if (upgradeInfo != null) {
             EquipWeapon(upgradeInfo.weaponPrefab);
@@ -85,13 +109,31 @@ public class WeaponManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 무기를 업그레이드 합니다.
+    /// </summary>
+    /// <param name="upgradeId"></param>
+    public void UpgradeWeapon(string upgradeId)
+    {
+        WeaponUpgradeData weaponUpgradeData = GetWeaponData(upgradeId);
+
+        ChangeWeapon(upgradeId);
+        //현재 무기에 업글 상태 반영
+        SetWeaponUpgradeStatus(upgradeId, UpgradeStatus.Completed);
+
+        // 다음 무기를 업글가능 상태로 전환
+        foreach (string nextUpgradeId in weaponUpgradeData.nextUpgrade.upgradeId) {
+            SetWeaponUpgradeStatus(nextUpgradeId, UpgradeStatus.Available);
+        }
+    }
+
+    /// <summary>
     /// 무기 업그레이드 리스트에서 해당하는 번호의 무기 업그레이드 정보를 가져옵니다
     /// </summary>
-    /// <param name="upgradeName"> 무기 이름 </param>
+    /// <param name="upgradeId"> 무기 이름 </param>
     /// <returns> 무기 정보 </returns>
-    public WeaponUpgradeData GetWeaponData(string upgradeName)
+    public WeaponUpgradeData GetWeaponData(string upgradeId)
     {
-        WeaponUpgradeData upgradeData = upgradeOptions.upgradeDatas.Find(info => info.name == upgradeName);
+        WeaponUpgradeData upgradeData = weaponUpgradeList[upgradeId];
 
         if (upgradeData!= null) {
             return upgradeData;
@@ -106,7 +148,7 @@ public class WeaponManager : MonoBehaviour
     /// 무기 장착
     /// </summary>
     /// <param name="weaponPrefab"> 장착할 무기 </param>
-    private void EquipWeapon(GameObject weaponPrefab)
+    void EquipWeapon(GameObject weaponPrefab)
     {
         if (currentWeapon != null) {
             Destroy(currentWeapon);
@@ -118,29 +160,35 @@ public class WeaponManager : MonoBehaviour
         weaponComponent.SetAttackEnabled(actionMode);
     }
 
+
     /// <summary>
-    /// 무기 리스트를 가져옵니다
+    /// 무기 업그레이드 정보들을 가져옵니다.
     /// </summary>
-    /// <returns> 무기 리스트 </returns>
-    public List<WeaponUpgradeData> GetWeaponDataList()
+    /// <returns> 무기 업그레이드 인덱스 </returns>
+    public Dictionary<string, WeaponUpgradeData> GetWeaponDatas()
     {
-        return upgradeOptions.upgradeDatas;
+        return weaponUpgradeList;
     }
 
-}
-
-public class WeaponUpgrageManager
-{
-    // 이미 업그레이드 된 정보들...
-    WeaponUpgradeList upgradeOptions;
-    // 전체 업그레이드 정보
-    Dictionary<string, WeaponUpgradeData> upgradeDictionary;
-
-    public WeaponUpgradeData GetUpgradeData(string id)
+    /// <summary>
+    /// 현재 무기 업그레이드 상태를 가져옵니다.
+    /// </summary>
+    /// <returns> 현 무기 업그레이드 상태 </returns>
+    public Dictionary<string, UpgradeStatus> GetWeaponUpgradeStatus()
     {
-        return upgradeDictionary[id];
+        return weaponUpgradeStatus;
     }
 
-
+    /// <summary>
+    /// 무기 업그레이드 정보를 갱신합니다.
+    /// </summary>
+    /// <param name="id"> 설정할 업그레이드 번호 </param>
+    /// <param name="status"> 설정할 상태 </param>
+    /// <returns></returns>
+    public Dictionary<string, UpgradeStatus> SetWeaponUpgradeStatus(string id, UpgradeStatus status)
+    {
+        weaponUpgradeStatus[id] = status;
+        return weaponUpgradeStatus;
+    }
 
 }

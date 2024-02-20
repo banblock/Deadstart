@@ -59,7 +59,7 @@ MonoBehaviour:
   nameText: {fileID: 721481856288622562}
   resourceContainer: {fileID: 3153919393377332026}
   disabledUpgradeUI: {fileID: 8381103569040088062}
-  WeaponIdNumber: 0
+  WeaponId: 
 --- !u!222 &1704869864628726704
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -144,7 +144,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2289229602939855234}
         m_TargetAssemblyTypeName: WeaponUpgradeButtonUI, Assembly-CSharp
-        m_MethodName: OnUpgradeButtonClick
+        m_MethodName: OnClickUpgradeButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

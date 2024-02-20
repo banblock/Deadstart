@@ -1607,7 +1607,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5006673400929493276
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2072,11 +2072,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4051106907209449385, guid: 5abe737ebe15bb5498bac0d8b05bdf9c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1468
+      value: 793
       objectReference: {fileID: 0}
     - target: {fileID: 4051106907209449385, guid: 5abe737ebe15bb5498bac0d8b05bdf9c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -207.5
+      value: -600
       objectReference: {fileID: 0}
     - target: {fileID: 4051106907209449385, guid: 5abe737ebe15bb5498bac0d8b05bdf9c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2182,11 +2182,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4051106907209449385, guid: 5abe737ebe15bb5498bac0d8b05bdf9c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1141
+      value: 793
       objectReference: {fileID: 0}
     - target: {fileID: 4051106907209449385, guid: 5abe737ebe15bb5498bac0d8b05bdf9c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -207.5
+      value: -404
       objectReference: {fileID: 0}
     - target: {fileID: 4051106907209449385, guid: 5abe737ebe15bb5498bac0d8b05bdf9c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2225,6 +2225,18 @@ PrefabInstance:
     - target: {fileID: 2504369270151831165, guid: 5abe737ebe15bb5498bac0d8b05bdf9c, type: 3}
       propertyPath: m_Name
       value: Upgrade Weapon Button (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2798278410737450786, guid: 5abe737ebe15bb5498bac0d8b05bdf9c, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.b
+      value: 0.21960786
+      objectReference: {fileID: 0}
+    - target: {fileID: 2798278410737450786, guid: 5abe737ebe15bb5498bac0d8b05bdf9c, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.g
+      value: 0.21960786
+      objectReference: {fileID: 0}
+    - target: {fileID: 2798278410737450786, guid: 5abe737ebe15bb5498bac0d8b05bdf9c, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.r
+      value: 0.21960786
       objectReference: {fileID: 0}
     - target: {fileID: 4051106907209449385, guid: 5abe737ebe15bb5498bac0d8b05bdf9c, type: 3}
       propertyPath: m_Pivot.x

@@ -21,13 +21,15 @@ public class WeaponUpgradeData
 [System.Serializable]
 public class UpgradeStpeData
 {
-    public enum SelectType
-    {
-        OR,
-        AND
-    }
+    
     public List<string> upgradeId;
     public SelectType selectType;
+}
+
+public enum SelectType
+{
+    OR,
+    AND
 }
 
 

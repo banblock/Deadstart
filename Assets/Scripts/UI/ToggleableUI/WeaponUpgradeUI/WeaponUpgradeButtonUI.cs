@@ -4,12 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum UpgradeStatus
-{
-    NotAvailable, // 업그레이드 불가
-    Available,    // 업그레이드 가능
-    Completed     // 업그레이드 완료
-}
+
 
 
 /// <summary>
@@ -31,16 +26,19 @@ public class WeaponUpgradeButtonUI : MonoBehaviour
     
     UpgradeStatus upgradeStatus = UpgradeStatus.NotAvailable;
 
-    WeaponUpgradeData weaponUpgradeData;
-
     [SerializeField]
     public string WeaponId;
 
-    void Start()
+    /// <summary>
+    /// 무기 업그레이드 버튼을 갱신합니다
+    /// </summary>
+    /// <param name="weaponData">무기 업그레이드 정보</param>
+    public void SetInitUI(WeaponUpgradeData weaponData)
     {
-        
+        nameText.text = weaponData.name;
+        image.sprite = weaponData.sprite;
+        resourceContainer.SetInitUI(weaponData.requiredUpgrades);
     }
-
 
     /// <summary>
     /// 현재 무기 업그레이드 상태를 지정합니다.
@@ -64,26 +62,14 @@ public class WeaponUpgradeButtonUI : MonoBehaviour
         }
     }
 
-
-    /// <summary>
-    /// 무기 업그레이드 버튼을 갱신합니다
-    /// </summary>
-    /// <param name="weaponData">무기 업그레이드 정보</param>
-    public void SetInitUI(WeaponUpgradeData weaponData)
-    {
-        weaponUpgradeData = weaponData;
-        nameText.text = weaponData.name;
-        image.sprite = weaponData.sprite;
-        resourceContainer.SetInitUI(weaponData.requiredUpgrades);
-    }
-
     /// <summary>
     /// 현재무기로 변경합니다
     /// </summary>
-    public void OnUpgradeButtonClick()
+    public void OnClickUpgradeButton()
     {
-        WeaponManager.Instance.ChangeWeapon(weaponUpgradeData.name);
+        if(upgradeStatus == UpgradeStatus.Available) {
+            WeaponUpgradeUI.Instance.UpgradeWeapon(WeaponId);
+        }
     }
-
 }
 
