@@ -3,27 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ¹«±â ÀåÂø ¹× ¾÷±×·¹ÀÌµå °ü¸®
+/// ì—…ê·¸ë ˆì´ë“œ ìƒíƒœ
+/// </summary>
+public enum UpgradeStatus
+{
+    NotAvailable, // ì—…ê·¸ë ˆì´ë“œ ë¶ˆê°€
+    Available,    // ì—…ê·¸ë ˆì´ë“œ ê°€ëŠ¥
+    Completed     // ì—…ê·¸ë ˆì´ë“œ ì™„ë£Œ
+}
+
+/// <summary>
+/// ë¬´ê¸° ì¥ì°© ë° ì—…ê·¸ë ˆì´ë“œ ê´€ë¦¬
 /// </summary>
 public class WeaponManager : MonoBehaviour
 {
     public static WeaponManager Instance { private set; get; }
 
-    public GameObject initialWeaponPrefab; //±âº»¹«±â
-    private GameObject currentWeapon; //ÇöÀç¹«±â
+    
+
+    [HideInInspector]
+    public GameObject initialWeaponPrefab; //ê¸°ë³¸ë¬´ê¸°
+
+    [SerializeField, HideInInspector]
+    private GameObject currentWeapon; //í˜„ì¬ë¬´ê¸°
+
+
+    [SerializeField, HideInInspector]
+    Transform weaponPosition; //ë¬´ê¸° ì¥ì°© ìœ„ì¹˜
 
     [SerializeField]
-    Transform weaponPosition; //¹«±â ÀåÂø À§Ä¡
+    WeaponUpgradeList upgradeOptions; //ì—…ê·¸ë ˆì´ë“œ ì˜µì…˜
 
     [SerializeField]
-    WeaponUpgradeList upgradeOptions; //¾÷±×·¹ÀÌµå °¡´É ¿É¼Ç
+    string initialWeaponId;
 
-    //ÇöÁ¦ ¾÷±×·¹ÀÌµåµÈ ¹«±â Á¤º¸ ÀúÀå
-    List<string> weaponUpgrade = new List<string>();
-
-    WeaponUpgrageManager WeaponUpgrageManager;
-
-
+    // ë¬´ê¸° ì—…ê·¸ë ˆì´ë“œ ì •ë³´
+    Dictionary<string, WeaponUpgradeData> weaponUpgradeList = new Dictionary<string, WeaponUpgradeData>();
+    
+    //ë¬´ê¸° ì—…ê·¸ë ˆì´ë“œ ìƒíƒœ
+    Dictionary<string, UpgradeStatus> weaponUpgradeStatus = new Dictionary<string, UpgradeStatus>();
 
     private void Awake()
     {
@@ -33,16 +51,17 @@ public class WeaponManager : MonoBehaviour
         else {
             Destroy(this);
         }
+        initSetUpgradeStatus();
     }
 
     void Start()
     {
         if(weaponPosition == null ) {
-            //¹«±â ÀåÂø À§Ä¡¸¦ ÇÃ·¹ÀÌ¾î·Î ¼³Á¤
+            //ë¬´ê¸° ì¥ì°© ìœ„ì¹˜ë¥¼ í”Œë ˆì´ì–´ë¡œ ì„¤ì •
             weaponPosition = PlayerController.Instance.transform;
         }
-        //±âº»¹«±â ÀåÂø
-        EquipWeapon(initialWeaponPrefab);
+        //ê¸°ë³¸ë¬´ê¸° ì¥ì°©
+        ChangeWeapon(initialWeaponId);
     }
 
     void Update()
@@ -64,19 +83,25 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
-    public void UpgradeWeapon()
+    /// <summary>
+    /// ì´ˆê¸° ì—…ê·¸ë ˆì´ë“œ ì •ë³´ë¥¼ ì„¤ì •í•©ë‹ˆë‹¤.
+    /// </summary>
+    void initSetUpgradeStatus()
     {
-        
+        foreach (var upgradeData in upgradeOptions.upgradeDatas) {
+            weaponUpgradeList.Add(upgradeData.name, upgradeData);
+            weaponUpgradeStatus.Add(upgradeData.name, UpgradeStatus.NotAvailable);
+        }
+        weaponUpgradeStatus[initialWeaponId] = UpgradeStatus.Available;
     }
 
-
     /// <summary>
-    /// ¹«±â º¯°æ¸¦ º¯°æÇÕ´Ï´Ù
+    /// ë¬´ê¸° ë³€ê²½ë¥¼ ë³€ê²½í•©ë‹ˆë‹¤
     /// </summary>
-    /// <param name="upgradeName"> ¹«±â ÀÌ¸§ </param>
-    public void ChangeWeapon(string upgradeName)
+    /// <param name="upgradeId"> ë¬´ê¸° ì´ë¦„ </param>
+    public void ChangeWeapon(string upgradeId)
     {
-        WeaponUpgradeData upgradeInfo = GetWeaponData(upgradeName);
+        WeaponUpgradeData upgradeInfo = GetWeaponData(upgradeId);
 
         if (upgradeInfo != null) {
             EquipWeapon(upgradeInfo.weaponPrefab);
@@ -84,28 +109,46 @@ public class WeaponManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ¹«±â ¾÷±×·¹ÀÌµå ¸®½ºÆ®¿¡¼­ ÇØ´çÇÏ´Â ¹øÈ£ÀÇ ¹«±â ¾÷±×·¹ÀÌµå Á¤º¸¸¦ °¡Á®¿É´Ï´Ù
+    /// ë¬´ê¸°ë¥¼ ì—…ê·¸ë ˆì´ë“œ í•©ë‹ˆë‹¤.
     /// </summary>
-    /// <param name="upgradeName"> ¹«±â ÀÌ¸§ </param>
-    /// <returns> ¹«±â Á¤º¸ </returns>
-    public WeaponUpgradeData GetWeaponData(string upgradeName)
+    /// <param name="upgradeId"></param>
+    public void UpgradeWeapon(string upgradeId)
     {
-        WeaponUpgradeData upgradeData = upgradeOptions.upgradeDatas.Find(info => info.name == upgradeName);
+        WeaponUpgradeData weaponUpgradeData = GetWeaponData(upgradeId);
+
+        ChangeWeapon(upgradeId);
+        //í˜„ì¬ ë¬´ê¸°ì— ì—…ê¸€ ìƒíƒœ ë°˜ì˜
+        SetWeaponUpgradeStatus(upgradeId, UpgradeStatus.Completed);
+
+        // ë‹¤ìŒ ë¬´ê¸°ë¥¼ ì—…ê¸€ê°€ëŠ¥ ìƒíƒœë¡œ ì „í™˜
+        foreach (string nextUpgradeId in weaponUpgradeData.nextUpgrade.upgradeId) {
+            SetWeaponUpgradeStatus(nextUpgradeId, UpgradeStatus.Available);
+        }
+    }
+
+    /// <summary>
+    /// ë¬´ê¸° ì—…ê·¸ë ˆì´ë“œ ë¦¬ìŠ¤íŠ¸ì—ì„œ í•´ë‹¹í•˜ëŠ” ë²ˆí˜¸ì˜ ë¬´ê¸° ì—…ê·¸ë ˆì´ë“œ ì •ë³´ë¥¼ ê°€ì ¸ì˜µë‹ˆë‹¤
+    /// </summary>
+    /// <param name="upgradeId"> ë¬´ê¸° ì´ë¦„ </param>
+    /// <returns> ë¬´ê¸° ì •ë³´ </returns>
+    public WeaponUpgradeData GetWeaponData(string upgradeId)
+    {
+        WeaponUpgradeData upgradeData = weaponUpgradeList[upgradeId];
 
         if (upgradeData!= null) {
             return upgradeData;
         }
         else {
-            Debug.LogError("ÇØ´ç ¾÷±×·¹ÀÌµå Á¤º¸¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.");
+            Debug.LogError("í•´ë‹¹ ì—…ê·¸ë ˆì´ë“œ ì •ë³´ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
             return null;
         }
     }
 
     /// <summary>
-    /// ¹«±â ÀåÂø
+    /// ë¬´ê¸° ì¥ì°©
     /// </summary>
-    /// <param name="weaponPrefab"> ÀåÂøÇÒ ¹«±â </param>
-    private void EquipWeapon(GameObject weaponPrefab)
+    /// <param name="weaponPrefab"> ì¥ì°©í•  ë¬´ê¸° </param>
+    void EquipWeapon(GameObject weaponPrefab)
     {
         if (currentWeapon != null) {
             Destroy(currentWeapon);
@@ -117,29 +160,35 @@ public class WeaponManager : MonoBehaviour
         weaponComponent.SetAttackEnabled(actionMode);
     }
 
+
     /// <summary>
-    /// ¹«±â ¸®½ºÆ®¸¦ °¡Á®¿É´Ï´Ù
+    /// ë¬´ê¸° ì—…ê·¸ë ˆì´ë“œ ì •ë³´ë“¤ì„ ê°€ì ¸ì˜µë‹ˆë‹¤.
     /// </summary>
-    /// <returns> ¹«±â ¸®½ºÆ® </returns>
-    public List<WeaponUpgradeData> GetWeaponDataList()
+    /// <returns> ë¬´ê¸° ì—…ê·¸ë ˆì´ë“œ ì¸ë±ìŠ¤ </returns>
+    public Dictionary<string, WeaponUpgradeData> GetWeaponDatas()
     {
-        return upgradeOptions.upgradeDatas;
+        return weaponUpgradeList;
     }
 
-}
-
-public class WeaponUpgrageManager
-{
-    // ÀÌ¹Ì ¾÷±×·¹ÀÌµå µÈ Á¤º¸µé...
-    WeaponUpgradeList upgradeOptions;
-    // ÀüÃ¼ ¾÷±×·¹ÀÌµå Á¤º¸
-    Dictionary<string, WeaponUpgradeData> upgradeDictionary;
-
-    public WeaponUpgradeData GetUpgradeData(string id)
+    /// <summary>
+    /// í˜„ì¬ ë¬´ê¸° ì—…ê·¸ë ˆì´ë“œ ìƒíƒœë¥¼ ê°€ì ¸ì˜µë‹ˆë‹¤.
+    /// </summary>
+    /// <returns> í˜„ ë¬´ê¸° ì—…ê·¸ë ˆì´ë“œ ìƒíƒœ </returns>
+    public Dictionary<string, UpgradeStatus> GetWeaponUpgradeStatus()
     {
-        return upgradeDictionary[id];
+        return weaponUpgradeStatus;
     }
 
-
+    /// <summary>
+    /// ë¬´ê¸° ì—…ê·¸ë ˆì´ë“œ ì •ë³´ë¥¼ ê°±ì‹ í•©ë‹ˆë‹¤.
+    /// </summary>
+    /// <param name="id"> ì„¤ì •í•  ì—…ê·¸ë ˆì´ë“œ ë²ˆí˜¸ </param>
+    /// <param name="status"> ì„¤ì •í•  ìƒíƒœ </param>
+    /// <returns></returns>
+    public Dictionary<string, UpgradeStatus> SetWeaponUpgradeStatus(string id, UpgradeStatus status)
+    {
+        weaponUpgradeStatus[id] = status;
+        return weaponUpgradeStatus;
+    }
 
 }
