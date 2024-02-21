@@ -19,14 +19,8 @@ public class WeaponManager : MonoBehaviour
 {
     public static WeaponManager Instance { private set; get; }
 
-    
-
-    [HideInInspector]
-    public GameObject initialWeaponPrefab; //기본무기
-
     [SerializeField, HideInInspector]
     private GameObject currentWeapon; //현재무기
-
 
     [SerializeField, HideInInspector]
     Transform weaponPosition; //무기 장착 위치
@@ -123,6 +117,24 @@ public class WeaponManager : MonoBehaviour
         // 다음 무기를 업글가능 상태로 전환
         foreach (string nextUpgradeId in weaponUpgradeData.nextUpgrade.upgradeId) {
             SetWeaponUpgradeStatus(nextUpgradeId, UpgradeStatus.Available);
+            weaponUpgradeList[nextUpgradeId].parentNode = upgradeId;
+        }
+
+        // 형제 노드 비활성화
+        if (weaponUpgradeList[upgradeId].parentNode != "") {
+            WeaponUpgradeData parentNode = GetWeaponData(weaponUpgradeList[upgradeId].parentNode);
+            Debug.Log(parentNode.name);
+
+            if( parentNode.nextUpgrade.selectType == SelectType.AND ) {
+                foreach (string upgradeBlockId in parentNode.nextUpgrade.upgradeId) {
+                    Debug.Log($"{upgradeBlockId} - {upgradeId}");
+
+                    if (upgradeBlockId != upgradeId) {
+                        Debug.Log("비활성화");
+                        SetWeaponUpgradeStatus(upgradeBlockId, UpgradeStatus.NotAvailable);
+                    }
+                }
+            }
         }
     }
 

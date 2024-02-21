@@ -16,14 +16,15 @@ public class WeaponUpgradeData
     public UpgradeStpeData nextUpgrade;
     public UpgradeStpeData previousUpgrade;
 
+    [HideInInspector]
+    public string parentNode;
 }
 
 [System.Serializable]
 public class UpgradeStpeData
 {
-    
-    public List<string> upgradeId;
     public SelectType selectType;
+    public List<string> upgradeId;
 }
 
 public enum SelectType

@@ -67,7 +67,8 @@ public class WeaponUpgradeButtonUI : MonoBehaviour
     /// </summary>
     public void OnClickUpgradeButton()
     {
-        if(upgradeStatus == UpgradeStatus.Available) {
+
+        if(upgradeStatus == UpgradeStatus.Available /* 자원량이 충분한지 확인 */ ) {
             WeaponUpgradeUI.Instance.UpgradeWeapon(WeaponId);
         }
     }
