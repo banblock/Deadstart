@@ -24,12 +24,13 @@ MonoBehaviour:
       Name: 1
       amount: 10
     nextUpgrade:
+      selectType: 0
       upgradeId:
       - 01-02
-      selectType: 1
     previousUpgrade:
-      upgradeId: []
       selectType: 0
+      upgradeId: []
+    parentNode: 
   - name: 01-02
     weaponPrefab: {fileID: 8869894488803603688, guid: 9e19e12d87ed6e440815174ac278912c, type: 3}
     sprite: {fileID: -2099173206, guid: 3ffdd5f568cf3734186e2c8015f7831d, type: 3}
@@ -41,14 +42,15 @@ MonoBehaviour:
       Name: 1
       amount: 10
     nextUpgrade:
+      selectType: 1
       upgradeId:
       - 01-03-1
       - 01-03-2
       - 01-03-3
-      selectType: 1
     previousUpgrade:
-      upgradeId: []
       selectType: 0
+      upgradeId: []
+    parentNode: 01-01
   - name: 01-03-1
     weaponPrefab: {fileID: 8869894488803603688, guid: 17fd1d01d2b6d904e8e323b4c7034d1c, type: 3}
     sprite: {fileID: 587834390, guid: 3ffdd5f568cf3734186e2c8015f7831d, type: 3}
@@ -57,30 +59,31 @@ MonoBehaviour:
       Name: 
       amount: 10
     nextUpgrade:
-      upgradeId: []
       selectType: 0
+      upgradeId: []
     previousUpgrade:
-      upgradeId: []
       selectType: 0
+      upgradeId: []
+    parentNode: 01-02
   - name: 01-03-2
     weaponPrefab: {fileID: 8869894488803603688, guid: 1ad02b96225afcf43965648a7f7aef68, type: 3}
     sprite: {fileID: -1384787349, guid: 3ffdd5f568cf3734186e2c8015f7831d, type: 3}
     requiredUpgrades: []
     nextUpgrade:
-      upgradeId:
-      - 
-      - 
-      selectType: 1
-    previousUpgrade:
-      upgradeId: []
       selectType: 0
+      upgradeId: []
+    previousUpgrade:
+      selectType: 0
+      upgradeId: []
+    parentNode: 01-02
   - name: 01-03-3
     weaponPrefab: {fileID: 8869894488803603688, guid: a63585d528f8afe45868e44e67de81c3, type: 3}
     sprite: {fileID: -508705453, guid: 3ffdd5f568cf3734186e2c8015f7831d, type: 3}
     requiredUpgrades: []
     nextUpgrade:
-      upgradeId: []
       selectType: 0
+      upgradeId: []
     previousUpgrade:
-      upgradeId: []
       selectType: 0
+      upgradeId: []
+    parentNode: 01-02

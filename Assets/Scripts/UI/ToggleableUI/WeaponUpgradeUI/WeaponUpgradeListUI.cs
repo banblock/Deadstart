@@ -27,7 +27,6 @@ public class WeaponUpgradeListUI : MonoBehaviour
             }
         }
 
-        Debug.Log("Collected " + weaponUpgradeObjects.Count + " objects with WeaponUpgradeButtonUI script.");
     }
 
     public void UpdateWeaponUpgradeButton()
