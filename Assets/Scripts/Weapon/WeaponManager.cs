@@ -60,6 +60,7 @@ public class WeaponManager : MonoBehaviour
 
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.Alpha1)) {
             ChangeWeapon("01-01");
         }
@@ -75,6 +76,7 @@ public class WeaponManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha5)) {
             ChangeWeapon("01-03-3");
         }
+        */
     }
 
     /// <summary>
