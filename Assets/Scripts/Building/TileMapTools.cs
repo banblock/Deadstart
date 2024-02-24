@@ -19,4 +19,9 @@ public class TileMapTools
         tilemap.SetTile(tilemapPos, tile);
     }
 
+    public void RemoveTilemap(Tilemap tilemap, Vector3Int tilemapPos)
+    {
+        tilemap.SetTile(tilemapPos, null);
+    }
+
 }

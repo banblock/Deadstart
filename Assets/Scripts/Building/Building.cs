@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -10,30 +11,28 @@ using UnityEngine.Tilemaps;
 [Serializable]
 public class Building
 {
+    [SerializeField]
+    //건물 실체
+    protected GameObject BuildingPrefab;
     //건물에 해당하는 타일들.
     public List<TileBase> Tiles;
+
     //건물의 좌표
     protected Vector3Int buildingTilePos;
-    //트리거의 좌표(상대적 고정)
+    //실체의 좌표(상대적 고정)
     protected Vector3 triggerPos;
-    [SerializeField]
-    //트리거 프리펩
-    protected GameObject triggerPrefab;
-    //건물 타입이름
-    protected string buildingType;
+
+
     //타일 그리기용 타일멥툴
     protected TileMapTools tileMapTool;
+
+    //빌딩 id
+    public int buildingId;
 
     
     public Building()
     {
         tileMapTool = new TileMapTools();
-    }
-
-    public Building(string type)
-    {
-        tileMapTool = new TileMapTools();
-        buildingType = type;
     }
 
     /// <summary>
@@ -65,10 +64,11 @@ public class Building
         }
     }
 
-    /// <summary>
-    /// 트리거 위치를 건물 중앙으로 설정
-    /// </summary>
-    /// <param name="tilemap"></param>
+    public void SetID(int id)
+    {
+        buildingId = id;
+    }
+
     protected virtual void SetTrigger(Tilemap tilemap)
     {
         triggerPos = tilemap.CellToWorld(buildingTilePos);
@@ -88,10 +88,17 @@ public class Building
     /// 트리거 프리펩을 반환
     /// </summary>
     /// <returns></returns>
-    public GameObject GetTriggerPrefab()
+    public GameObject GetBuildingPrefab()
     {
-        return triggerPrefab;
+        return BuildingPrefab;
     }
 
-
+    public void RemoveBuildingTiles(Tilemap tilemap, Vector3Int tilepos)
+    {
+        buildingTilePos = tilepos;
+        for (int i = 0; i < Tiles.Count; i++, SetTilePos(i))
+        {
+            tileMapTool.RemoveTilemap(tilemap, buildingTilePos);
+        }
+    } 
 }

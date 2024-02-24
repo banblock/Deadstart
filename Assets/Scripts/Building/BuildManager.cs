@@ -14,58 +14,91 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 /// </summary>
 public class BuildManager : MonoBehaviour
 {
-    // 빌드 타일멥.
+    //HitCheck
+        // 빌드 타일멥.
     public Tilemap tilemap;
-    // 타일멥에 그릴 타일.
-    public TileBase tile;
-    private TileMapTools buildTilemapTools;
     private Vector3Int tilemapPos = Vector3Int.zero;
-
-    //빌딩 가이드 오브젝트.
+        //빌딩 가이드 오브젝트.
     public GameObject buildingGuid;
     private Vector2 pos;
-    
-    [SerializeField]
-    //그려진 빌딩 데이터 리스트 
-    public List<Building> buildings;
-    
-    //빌딩 종류
-    public enum BuildingType {small, middel, big};
-    public BuildingType buildingState;
 
+    //프리펩 생성과 데이터 관리를 담당하는 객체
+    public BuildingList buildingDataList;
+    
+    //building
+    [SerializeField]
+        //그려질 빌딩 데이터 리스트 
+    public List<Building> buildings;
+        //빌딩 타입
+    public enum BuildingType { small, middel, big };
+    public BuildingType buildingState;
+    public GameObject selectedBuilding;
+
+    //모드
+    public bool isBuild;
+    public bool isDestroye;
+//-------------------------------------------------------------------------------------------- 메인
     private void Start()
-    {  
-        buildTilemapTools = new TileMapTools();
+    {
         buildingGuid = GameObject.Find("Guid");
+        isDestroye = false;
+        isBuild = true;
+        buildingDataList = new BuildingList();
+        ActionManager.instance.OnActionModeChanged += SetBuildModeEnable;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (isBuild)
         {
-            if (!CheckHit())
+            if (Input.GetMouseButtonDown(0))
             {
-                Building building;
-                switch (buildingState)
+                if (!isDestroye)
                 {
-                    case BuildingType.small:
-                        building = buildings[0];
-                        building.DrawBuilding(tilemap, tilemapPos);
-                        SetBuildingTrigger(building);
-                        break;
+                    BuildBuilding();
+                }
+                else
+                {
+                    if (CheckBuilding())
+                    {
+                        DestroyBuilding(selectedBuilding);
+                        selectedBuilding = null;
+                    }
 
                 }
+            }else if(Input.GetKeyDown(KeyCode.B))
+            {
+                isDestroye = !isDestroye;
+            }
 
+        }
+    }
+//------------------------------------------------------------------------------------------------- 빌드 프레임
+    private void BuildBuilding()
+    {
+        if (!CheckHit())
+        {
+            switch (buildingState)
+            {
+                case BuildingType.small:
+                    buildings[0].DrawBuilding(tilemap, tilemapPos);
+                    AddBuildingTrigger(buildings[0]);
+                    break;
 
-                /*Debug.Log("Draw");
-                buildTilemapTools.DrawTilemap(tilemap, tile, tilemapPos);*/
             }
         }
-
-
-
     }
+
+    public void DestroyBuilding(GameObject prefab)
+    {
+        SetTilePos();
+        buildings[0].RemoveBuildingTiles(tilemap, tilemapPos);
+        buildingDataList.DestroyBuilding(prefab);
+        Destroy(prefab);
+    }
+
+//----------------------------------------------------------------------------------------- 툴
 
     /// <summary>
     /// 멥상에 다른 건축물이 있나 판별.
@@ -92,7 +125,7 @@ public class BuildManager : MonoBehaviour
             }
             else{*/
             SpriteRenderer sr = buildingGuid.GetComponent<SpriteRenderer>();
-            if(sr.color != Color.green)
+            if (sr.color != Color.green)
             {
                 return true;
             }
@@ -105,7 +138,7 @@ public class BuildManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 그려질 타일의 위치를 조정.
+    /// 마우스의 타일의 위치를 탐색.
     /// </summary>
     public void SetTilePos()
     {
@@ -115,15 +148,44 @@ public class BuildManager : MonoBehaviour
         tilemapPos = new Vector3Int((int)tilePos3.x, (int)tilePos3.y, 0);
         Debug.Log(tilePos3.x);
         Debug.Log(tilePos3.y);
-    } 
+    }
 
     /// <summary>
     /// 생성한 빌딩의 트리거를 셋팅
     /// </summary>
     /// <param name="building"></param>
-    public void SetBuildingTrigger(Building building)
+    public void AddBuildingTrigger(Building building)
+    {   
+        GameObject trigger = Instantiate(building.GetBuildingPrefab(), building.GetTriggerPos(), Quaternion.identity);
+        BuildingData data = trigger.GetComponent<BuildingData>();
+        data.SetBuildingPos(building.GetTriggerPos());
+        data.SetPrefab(trigger);
+        Debug.Log("building id" + building.buildingId);
+        data.buildingId = building.buildingId;
+        Debug.Log("data id" + data.buildingId);
+        buildingDataList.AddBuild(trigger);
+    }
+
+    public bool CheckBuilding()
     {
-        GameObject trigger = Instantiate(building.GetTriggerPrefab(), building.GetTriggerPos(), Quaternion.identity);
+        Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero, 0f);
+
+        if(hit.collider != null)
+        {
+            selectedBuilding = hit.collider.gameObject;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+    private void SetBuildModeEnable(ActionMode action)
+    {
+        isBuild = (action == ActionMode.BuildMode);
     }
 }
 

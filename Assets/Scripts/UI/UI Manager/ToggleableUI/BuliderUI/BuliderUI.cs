@@ -44,7 +44,7 @@ public class BuilderUI : ToggleableUI
     {
         ClearUIContainer();
 
-        foreach (BuildingData building in buildingList.buildings) {
+        /*foreach (BuildingData building in buildingList.buildings) {
             if (building != null) {
                 GameObject newButton = Instantiate(bulidingUIButtonPrefab, BuliderUIContainer.transform);
                 BuildingSlotUI buildingSlot = newButton.GetComponent<BuildingSlotUI>();
@@ -56,7 +56,7 @@ public class BuilderUI : ToggleableUI
                     Debug.LogError("BuildingSlotUI script not found on the instantiated button.");
                 }
             }
-        }
+        }*/
     }
 
     private void ClearUIContainer()

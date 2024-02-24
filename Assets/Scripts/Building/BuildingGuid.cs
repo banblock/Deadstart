@@ -19,14 +19,8 @@ public class BuildingGuid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 pos3 = new Vector3(pos.x, pos.y, 0);
-        Vector3 tilePos3 = tilemap.WorldToCell(pos3);
-        Vector3Int tilemapPos = new Vector3Int((int)tilePos3.x, (int)tilePos3.y, 0);
-        Vector3 mousePos = tilemap.CellToLocal(tilemapPos);
-        mousePos.y = mousePos.y + (float)0.25;
 
-        transform.position = mousePos;
+        transform.position = SetMousePos();
         if(Mathf.Abs(transform.localPosition.x) > 4f|| Mathf.Abs(transform.localPosition.x) < 1f)
         {
             if(Mathf.Abs(transform.localPosition.y) > 2f || Mathf.Abs(transform.localPosition.y) < 1f)
@@ -38,6 +32,17 @@ public class BuildingGuid : MonoBehaviour
         {
             spriteRenderer.color = Color.green;
         }
+    }
+
+    private Vector3 SetMousePos()
+    {
+        Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 pos3 = new Vector3(pos.x, pos.y, 0);
+        Vector3 tilePos3 = tilemap.WorldToCell(pos3);
+        Vector3Int tilemapPos = new Vector3Int((int)tilePos3.x, (int)tilePos3.y, 0);
+        Vector3 mousePos = tilemap.CellToLocal(tilemapPos);
+        mousePos.y = mousePos.y + (float)0.25;
+        return mousePos;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
