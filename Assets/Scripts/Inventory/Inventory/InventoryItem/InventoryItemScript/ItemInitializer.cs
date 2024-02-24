@@ -4,46 +4,47 @@ namespace InventorySystem
 {
     //Author: Jaxon Schauer
     /// <summary>
-    /// Takes input to initialize items when game is played
+    /// 게임이 실행될 때 아이템을 초기화하기 위해 입력을 받습니다.
     /// </summary>
     [System.Serializable]
     public class ItemInitializer
     {
         private int amount = 1;
 
-        // Essential Item Properties
-        [Header("========[ Item Properties ]========")]
+        // 아이템 속성
+        [Header("========[ 아이템 속성 ]========")]
 
-        [Tooltip("Create a type/classification of items.")]
+        [Tooltip("아이템의 유형/분류를 생성합니다.")]
         [SerializeField]
         private string itemType;
 
-        [Tooltip("Visual representation of the item.")]
+        [Tooltip("아이템의 시각적 표현입니다.")]
         [SerializeField]
         private Sprite itemImage;
 
-        [Tooltip("Maximum number of this item that can be stacked together.")]
+        [Tooltip("한 번에 함께 쌓을 수 있는 이 아이템의 최대 수량입니다.")]
         [SerializeField]
         private int maxStackAmount;
 
-        [Tooltip("Display the quantity/amount of the item on its icon.")]
+        [Tooltip("아이템 아이콘에 수량/양을 표시합니다.")]
         [SerializeField]
         private bool displayItemAmount;
-        // Optional Item Configurations
-        [Header("========[ Optional Configurations ]========")]
-        [Tooltip("Determines if the item can be dragged within inventories.")]
+
+        // 선택적 아이템 구성
+        [Header("========[ 선택적 설정 ]========")]
+        [Tooltip("인벤토리 내에서 아이템을 끌어다 놓을 수 있는지 여부를 결정합니다.")]
         [SerializeField]
         private bool draggable;
 
-        [Tooltip("Determines if the item can be highlighted when selected.")]
+        [Tooltip("선택 시 아이템을 강조할 수 있는지 여부를 결정합니다.")]
         [SerializeField]
         private bool pressable;
 
-        [Tooltip("Game object implementation of the item that can be set up to be affected it.")]
+        [Tooltip("이 아이템에 관련된 게임 오브젝트의 구현을 설정할 수 있습니다.")]
         [SerializeField]
         private GameObject RelatedGameObject;
 
-        [Tooltip("Event triggered in relation to this item.")]
+        [Tooltip("이 아이템과 관련된 이벤트를 트리거합니다.")]
         [SerializeField]
         private InventoryItemEvent itemAction;
 
@@ -103,4 +104,5 @@ namespace InventorySystem
             return displayItemAmount;
         }
     }
+
 }

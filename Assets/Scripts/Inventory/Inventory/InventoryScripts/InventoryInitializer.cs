@@ -12,17 +12,17 @@ namespace InventorySystem
     [System.Serializable]
     public class InventoryInitializer
     {
-        [Header("========[ ±âº» ÀÎº¥Åä¸® Á¤º¸ ]========")]
+        [Header("========[ ê¸°ë³¸ ì¸ë²¤í† ë¦¬ ì •ë³´ ]========")]
 
-        [Tooltip("ÀÎº¥Åä¸®¿¡ ´ëÇÑ ¼³¸íÀûÀÎ ÀÌ¸§ ¶Ç´Â ½Äº°ÀÚ.")]
+        [Tooltip("ì¸ë²¤í† ë¦¬ì— ëŒ€í•œ ì„¤ëª…ì ì¸ ì´ë¦„ ë˜ëŠ” ì‹ë³„ì.")]
         [SerializeField]
         private string inventoryName;
 
-        [Tooltip("ÀÎº¥Åä¸® ·¹ÀÌ¾Æ¿ôÀÇ Çà ¼ö.")]
+        [Tooltip("ì¸ë²¤í† ë¦¬ ë ˆì´ì•„ì›ƒì˜ í–‰ ìˆ˜.")]
         [SerializeField]
         private int rows;
 
-        [Tooltip("ÀÎº¥Åä¸® ·¹ÀÌ¾Æ¿ôÀÇ ¿­ ¼ö.")]
+        [Tooltip("ì¸ë²¤í† ë¦¬ ë ˆì´ì•„ì›ƒì˜ ì—´ ìˆ˜.")]
         [SerializeField]
         private int cols;
 
@@ -86,3 +86,4 @@ namespace InventorySystem
         }
     }
 }
+

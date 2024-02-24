@@ -4,9 +4,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-
-
 /// <summary>
 /// 무기 업그레이드 버튼
 /// </summary>
