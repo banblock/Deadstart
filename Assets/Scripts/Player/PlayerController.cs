@@ -11,11 +11,15 @@ public class PlayerController : MonoBehaviour
     private WeaponManager weaponManager;
     private Rigidbody2D rigid;
 
+    [SerializeField] 
+    private string playerName = "player";
+    public string PlayerName { get { return playerName; } }
+
     [SerializeField]
     private PlayerStats playerStats;  // 플레이어 스탯 관리 클래스
+    public PlayerStats Stats { get { return playerStats; }}
 
     private Vector2 inputVector;
-
 
     private void Awake()
     {
